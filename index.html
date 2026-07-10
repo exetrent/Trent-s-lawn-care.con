@@ -7,22 +7,22 @@
 <meta name="theme-color" content="#071b0f">
 <title>Trent's Lawn Care | Louisville, Kentucky</title>
 <meta name="description" content="Owner-operated lawn care in Louisville, Kentucky. Lawn mowing, trimming, edging, cleanup, and recurring service.">
-<link rel="canonical" href="https://exetrent.github.io/Trent-s-lawn-care.con/">
+<link rel="canonical" href="https://trentslawncare.com/">
 <meta name="robots" content="index, follow">
 <meta name="geo.region" content="US-KY">
 <meta name="geo.placename" content="Louisville">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Trent's Lawn Care | Louisville, Kentucky">
 <meta property="og:description" content="Local lawn mowing, trimming, edging, cleanup, bush trimming, and recurring service in Louisville, Kentucky.">
-<meta property="og:url" content="https://exetrent.github.io/Trent-s-lawn-care.con/">
-<meta property="og:image" content="https://exetrent.github.io/Trent-s-lawn-care.con/owner.jpg">
+<meta property="og:url" content="https://trentslawncare.com/">
+<meta property="og:image" content="https://trentslawncare.com/owner.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Trent's Lawn Care",
-  "url": "https://exetrent.github.io/Trent-s-lawn-care.con/",
-  "image": "https://exetrent.github.io/Trent-s-lawn-care.con/owner.jpg",
+  "url": "https://trentslawncare.com/",
+  "image": "https://trentslawncare.com/owner.jpg",
   "telephone": "+1-502-835-8658",
   "email": "exetrent1@gmail.com",
   "description": "Owner-operated lawn care serving Louisville, Kentucky, including mowing, trimming, edging, cleanup, bush trimming, and recurring service.",
@@ -326,6 +326,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0
 textarea{min-height:115px;resize:vertical}
 .form-status{min-height:22px;font-size:.86rem;font-weight:800;margin-top:10px;color:var(--green)}
 .form .btn{width:100%;margin-top:6px}
+.form-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.form-actions .btn{margin:0}
+.btn-outline{background:white;color:var(--ink);border:2px solid var(--ink)}
+.btn-calendar{background:#e9f4e3;color:var(--ink);border:1px solid #c8dbbd}
+@media (max-width:650px){.form-actions{grid-template-columns:1fr}}
 
 footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
 .footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:center}
@@ -429,7 +434,7 @@ footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
       <h3>Call or text Trent today.</h3>
     </div>
     <div class="promo-points"><span>✓ Free estimates</span><span>✓ Local service</span><span>✓ Straightforward pricing</span></div>
-    <a class="btn btn-dark" href="sms:+15028358658?&body=Hi%20Trent%2C%20I%27d%20like%20a%20lawn%20care%20quote.">Request a Quote</a>
+    <a class="btn btn-dark" href="sms:+15028358658">Request a Quote</a>
   </div>
 </div>
 
@@ -514,13 +519,22 @@ footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
         <div class="field"><label for="preferredDate">Preferred day *</label><input id="preferredDate" name="preferredDate" type="date" required></div>
         <div class="field"><label for="preferredTime">Preferred time *</label>
           <select id="preferredTime" name="preferredTime" required>
-            <option value="">Choose a time</option><option>Morning (8 AM–11 AM)</option><option>Midday (11 AM–2 PM)</option><option>Afternoon (2 PM–6 PM)</option><option>Any time that day</option>
+            <option value="">Choose a time</option>
+            <option value="08:00">Morning — 8:00 AM</option>
+            <option value="11:00">Midday — 11:00 AM</option>
+            <option value="14:00">Afternoon — 2:00 PM</option>
+            <option value="17:00">Evening — 5:00 PM</option>
           </select>
         </div>
         <div class="field full"><label for="details">Tell Trent about the job</label><textarea id="details" name="details" placeholder="Describe the grass height, trimming, edging, bushes, cleanup, gate access, and anything else you want done."></textarea></div>
       </div>
       <p class="schedule-note">Your selected day and time are a request. The appointment is confirmed after Trent replies.</p>
-      <button class="btn btn-lime" type="submit">Send Job & Schedule Request →</button>
+      <div class="form-actions">
+        <button class="btn btn-lime" type="submit">Text Quote to Trent →</button>
+        <button class="btn btn-calendar" type="button" id="calendarBtn">Add Schedule Request 📅</button>
+        <button class="btn btn-outline" type="button" id="emailBtn">Email Quote ✉️</button>
+        <a class="btn btn-dark" href="tel:+15028358658">Call (502) 835-8658</a>
+      </div>
       <div class="form-status" id="formStatus" aria-live="polite"></div>
     </form>
   </div>
@@ -773,37 +787,101 @@ document.querySelectorAll('.assistant-options button').forEach(button => {
 
 const form = document.getElementById('quoteForm');
 const status = document.getElementById('formStatus');
+const calendarBtn = document.getElementById('calendarBtn');
+const emailBtn = document.getElementById('emailBtn');
+const TRENT_PHONE = '+15028358658';
+const BUSINESS_EMAIL = 'exetrent1@gmail.com';
+
+function getQuoteDetails() {
+  return {
+    name: document.getElementById('name').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    yardSize: document.getElementById('yardSize').value,
+    budget: document.getElementById('budget').value,
+    service: document.getElementById('service').value,
+    preferredDate: document.getElementById('preferredDate').value,
+    preferredTime: document.getElementById('preferredTime').value,
+    details: document.getElementById('details').value.trim()
+  };
+}
+
+function buildQuoteMessage(d) {
+  return `Hi Trent, I'd like a lawn care quote.
+
+Name: ${d.name}
+My phone: ${d.phone}
+Service address: ${d.address}
+Yard size: ${d.yardSize}
+What I need done: ${d.service}
+Expected price / budget: ${d.budget || 'I need a quote'}
+Requested day: ${d.preferredDate}
+Requested time: ${d.preferredTime}
+Job details: ${d.details || 'No extra details yet'}
+
+I can send yard pictures too. Please reply to confirm the date, time, and final price.`;
+}
+
+function requireValidForm() {
+  if (!form.reportValidity()) {
+    status.textContent = 'Please complete the required fields first.';
+    return false;
+  }
+  return true;
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (!form.reportValidity()) return;
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const yardSize = document.getElementById('yardSize').value;
-  const budget = document.getElementById('budget').value;
-  const service = document.getElementById('service').value;
-  const preferredDate = document.getElementById('preferredDate').value;
-  const preferredTime = document.getElementById('preferredTime').value;
-  const details = document.getElementById('details').value.trim();
+  if (!requireValidForm()) return;
+  const message = buildQuoteMessage(getQuoteDetails());
+  status.textContent = 'Opening a text to Trent at (502) 835-8658...';
+  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const separator = isiOS ? '&' : '?';
+  window.location.href = `sms:${TRENT_PHONE}${separator}body=${encodeURIComponent(message)}`;
+});
 
-  const message =
-`Hi Trent, I'd like a lawn care quote.
+emailBtn.addEventListener('click', () => {
+  if (!requireValidForm()) return;
+  const d = getQuoteDetails();
+  const subject = `Lawn Care Quote Request — ${d.name}`;
+  const body = buildQuoteMessage(d);
+  status.textContent = 'Opening an email to Trent\'s Lawn Care...';
+  window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
 
-Name: ${name}
-My phone: ${phone}
-Service address: ${address}
-Yard size: ${yardSize}
-What I need done: ${service}
-Expected price / budget: ${budget || 'I need a quote'}
-Requested day: ${preferredDate}
-Requested time: ${preferredTime}
-Job details: ${details || 'No extra details yet'}
+function calendarStamp(date, time) {
+  return date.replace(/-/g, '') + 'T' + time.replace(':', '') + '00';
+}
 
-I can send yard pictures too.`;
+function addHours(date, time, hours) {
+  const value = new Date(`${date}T${time}:00`);
+  value.setHours(value.getHours() + hours);
+  const y = value.getFullYear();
+  const m = String(value.getMonth() + 1).padStart(2, '0');
+  const day = String(value.getDate()).padStart(2, '0');
+  const hh = String(value.getHours()).padStart(2, '0');
+  const mm = String(value.getMinutes()).padStart(2, '0');
+  return `${y}${m}${day}T${hh}${mm}00`;
+}
 
-  status.textContent = 'Opening your text app with the quote request ready to send...';
-  const sms = `sms:+15028358658?&body=${encodeURIComponent(message)}`;
-  window.location.href = sms;
+calendarBtn.addEventListener('click', () => {
+  if (!requireValidForm()) return;
+  const d = getQuoteDetails();
+  const start = calendarStamp(d.preferredDate, d.preferredTime);
+  const end = addHours(d.preferredDate, d.preferredTime, 2);
+  const title = `Lawn Care Request — ${d.name}`;
+  const calendarDetails = buildQuoteMessage(d) + '\n\nThis is a requested appointment. Trent will accept or reply to confirm.';
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${start}/${end}`,
+    details: calendarDetails,
+    location: d.address,
+    add: BUSINESS_EMAIL,
+    ctz: 'America/Kentucky/Louisville'
+  });
+  status.textContent = 'Opening Google Calendar. Save the event to send Trent the schedule request...';
+  window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank', 'noopener');
 });
 </script>
 </body>
