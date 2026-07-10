@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071b0f">
+<title>Trent's Lawn Care | Louisville, Kentucky</title>
+<meta name="description" content="Owner-operated lawn care in Louisville, Kentucky. Lawn mowing, trimming, edging, cleanup, and recurring service.">
+<style>
+:root {
+  --ink:#071b0f;
+  --forest:#0c2e19;
+  --forest-2:#123d22;
+  --green:#72ad2d;
+  --lime:#c9ef57;
+  --cream:#f6f2e7;
+  --paper:#fffdf7;
+  --muted:#68736b;
+  --line:rgba(7,27,15,.13);
+  --shadow:0 26px 70px rgba(7,27,15,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.55;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.wrap{width:min(1180px,calc(100% - 34px));margin:auto}
+.section{padding:94px 0}
+.kicker{font-size:.76rem;font-weight:950;text-transform:uppercase;letter-spacing:.16em;color:var(--green);margin-bottom:10px}
+h1,h2,h3,p{margin-top:0}
+h1,h2{letter-spacing:-.055em;text-transform:uppercase;line-height:.92}
+h1{font-size:clamp(3.25rem,8vw,7rem);margin:19px 0 20px;font-weight:1000}
+h2{font-size:clamp(2.3rem,5vw,4.6rem);margin-bottom:0;font-weight:1000}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  border:0;border-radius:999px;padding:14px 18px;font-weight:950;
+  transition:.2s ease;min-height:48px
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--ink);box-shadow:0 15px 35px rgba(171,209,66,.25)}
+.btn-dark{background:var(--ink);color:white}
+.btn-ghost{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:white}
+.btn-white{background:white;color:var(--ink)}
+
+.topbar{background:#041108;color:#eaf5ec;font-size:.84rem}
+.topbar .wrap{min-height:38px;display:flex;align-items:center;justify-content:center;text-align:center}
+.topbar strong{color:var(--lime)}
+header{
+  position:sticky;top:0;z-index:100;background:rgba(246,242,231,.93);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)
+}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;min-width:max-content}
+.logo{
+  width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--lime),#9cca36);font-weight:1000;font-size:1.05rem;
+  box-shadow:0 12px 28px rgba(102,143,42,.22)
+}
+.brand strong{display:block;font-size:1rem;text-transform:uppercase;letter-spacing:-.025em;line-height:1}
+.brand span{display:block;font-size:.68rem;color:var(--muted);font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin-top:5px}
+.navlinks{display:flex;align-items:center;gap:21px;font-size:.88rem;font-weight:900}
+.navlinks a:hover{color:var(--green)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.menu{display:none;border:1px solid var(--line);background:white;border-radius:14px;width:46px;height:46px;font-size:1.2rem}
+
+.hero{
+  min-height:740px;background:
+  radial-gradient(circle at 72% 36%,rgba(201,239,87,.12),transparent 28%),
+  linear-gradient(135deg,#06170d,#0d321b 62%,#092515);
+  color:white;position:relative;overflow:hidden
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:-2px;height:110px;
+  background:linear-gradient(transparent,var(--cream))
+}
+.hero-grid{min-height:740px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:28px;padding:80px 0 110px;position:relative;z-index:2}
+.hero-copy{max-width:720px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(201,239,87,.33);
+  background:rgba(201,239,87,.1);color:#efffc7;border-radius:999px;padding:8px 12px;
+  font-size:.76rem;font-weight:950;text-transform:uppercase;letter-spacing:.13em
+}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 6px rgba(201,239,87,.12)}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero-lead{font-size:clamp(1rem,2vw,1.18rem);color:rgba(255,255,255,.78);max-width:650px;margin-bottom:26px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.trust span{padding:9px 11px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.19);border-radius:14px;font-size:.82rem;font-weight:850}
+
+.hero-art{position:relative;min-height:570px}
+.louisville-oval{
+  position:absolute;right:-7%;top:4%;width:108%;height:78%;border-radius:50%;
+  background:
+    linear-gradient(rgba(201,239,87,.18),rgba(7,27,15,.56)),
+    url('owner.jpg') 46% 23% / cover;
+  border:2px solid rgba(201,239,87,.42);
+  box-shadow:inset 0 0 0 12px rgba(201,239,87,.05),0 30px 70px rgba(0,0,0,.24);
+  overflow:hidden
+}
+.louisville-oval::after{
+  content:"LOUISVILLE, KENTUCKY";position:absolute;left:50%;bottom:20px;transform:translateX(-50%);
+  color:#f3ffd5;font-size:.72rem;font-weight:1000;letter-spacing:.18em;white-space:nowrap;
+  padding:8px 12px;border-radius:999px;background:rgba(4,17,8,.64);border:1px solid rgba(255,255,255,.16)
+}
+.owner-hero-card{
+  position:absolute;right:8%;bottom:0;width:58%;height:78%;border-radius:32px;overflow:hidden;
+  box-shadow:0 38px 80px rgba(0,0,0,.35);border:4px solid rgba(255,255,255,.75);
+  background:#123
+}
+.owner-hero-card img{width:100%;height:100%;object-fit:cover;object-position:50% 52%}
+.owner-tag{
+  position:absolute;left:20px;bottom:20px;background:rgba(6,23,13,.83);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.2);padding:12px 14px;border-radius:16px
+}
+.owner-tag strong{display:block;color:var(--lime);text-transform:uppercase;letter-spacing:.08em}
+.owner-tag span{font-size:.8rem;color:rgba(255,255,255,.76)}
+
+.promo-wrap{position:relative;z-index:5;margin-top:-52px}
+.promo{
+  display:grid;grid-template-columns:1.3fr .75fr auto;align-items:center;gap:24px;
+  background:var(--lime);border-radius:28px;padding:25px 28px;border:4px solid rgba(255,255,255,.82);box-shadow:var(--shadow)
+}
+.promo small{font-weight:1000;letter-spacing:.14em;text-transform:uppercase;opacity:.64}
+.promo h3{font-size:clamp(1.55rem,3vw,2.6rem);line-height:.95;letter-spacing:-.045em;text-transform:uppercase;margin:5px 0 0}
+.promo-points{display:grid;gap:5px;font-size:.88rem;font-weight:900}
+
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:34px}
+.section-head p{max-width:520px;color:var(--muted);margin:0}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:27px;
+  box-shadow:0 14px 36px rgba(18,63,37,.06)
+}
+.service-card{min-height:250px;transition:.2s ease}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(18,63,37,.12)}
+.service-icon{font-size:2rem;margin:16px 0}
+.service-card h3{margin-bottom:7px;font-size:1.18rem}
+.service-card p{color:var(--muted);font-size:.92rem;margin-bottom:0}
+.service-num{font-size:.76rem;font-weight:1000;color:var(--green);letter-spacing:.12em}
+
+.owner-section{background:#eaf1e5}
+.owner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:stretch}
+.owner-photo{min-height:620px;border-radius:34px;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.owner-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 52%}
+.owner-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(4,17,8,.82))}
+.owner-photo-label{position:absolute;z-index:2;left:26px;right:26px;bottom:26px;color:white}
+.owner-photo-label strong{display:block;font-size:2rem;letter-spacing:-.04em;text-transform:uppercase}
+.owner-copy{background:var(--ink);color:white;border-radius:34px;padding:46px;position:relative;overflow:hidden}
+.owner-copy::after{content:"TRENT";position:absolute;right:-24px;bottom:-52px;font-size:9rem;font-weight:1000;letter-spacing:-.08em;color:rgba(255,255,255,.035)}
+.owner-copy .kicker{color:var(--lime)}
+.owner-copy p{color:rgba(255,255,255,.72);max-width:640px}
+.owner-quote{font-size:1.2rem;font-weight:850;color:white!important;margin:25px 0}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:28px}
+.value{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.05)}
+.value strong{display:block;color:var(--lime)}
+.value span{font-size:.8rem;color:rgba(255,255,255,.62)}
+
+.ad-section{padding:35px 0 0}
+.ad{
+  background:
+    linear-gradient(90deg,rgba(7,27,15,.94),rgba(7,27,15,.70)),
+    url('owner.jpg') 50% 31% / cover;
+  color:white;border-radius:34px;padding:42px;min-height:310px;display:flex;align-items:end;box-shadow:var(--shadow)
+}
+.ad-inner{max-width:760px}
+.ad-badge{display:inline-flex;background:var(--lime);color:var(--ink);font-weight:1000;padding:8px 11px;border-radius:999px;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+.ad h3{font-size:clamp(2rem,5vw,4.7rem);line-height:.92;letter-spacing:-.055em;text-transform:uppercase;margin:15px 0 12px}
+.ad p{color:rgba(255,255,255,.76);max-width:620px}
+
+.map-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:18px}
+.area-copy{background:var(--ink);color:white;border-radius:30px;padding:36px}
+.area-copy .kicker{color:var(--lime)}
+.area-copy p{color:rgba(255,255,255,.7)}
+.area-list{display:grid;gap:10px;margin:24px 0}
+.area-list div{display:flex;gap:10px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.09);font-weight:850}
+.area-list b{color:var(--lime)}
+.map-box{border-radius:30px;overflow:hidden;min-height:510px;border:1px solid var(--line);box-shadow:var(--shadow);background:white}
+.map-box iframe{width:100%;height:510px;border:0;display:block}
+.google-map-wrap{position:relative;min-height:510px;background:#e8eee7}
+.google-map-wrap iframe{width:100%;height:510px;border:0;display:block}
+.google-map-badge{
+  position:absolute;left:18px;bottom:18px;z-index:2;
+  padding:10px 13px;border-radius:999px;background:rgba(7,27,15,.9);
+  color:white;font-size:.78rem;font-weight:950;box-shadow:0 10px 28px rgba(7,27,15,.2)
+}
+.posts-section{background:#eaf1e5}
+.posts-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:start}
+.embed-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:30px;
+  padding:24px;box-shadow:0 16px 42px rgba(18,63,37,.08)
+}
+.embed-card h3{font-size:1.45rem;margin-bottom:8px}
+.embed-card>p{color:var(--muted);font-size:.9rem}
+.video-frame{
+  margin-top:18px;position:relative;width:100%;aspect-ratio:16/9;
+  border-radius:22px;overflow:hidden;background:#071b0f
+}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.social-stack{display:grid;gap:12px}
+.social-profile{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:18px;border:1px solid var(--line);border-radius:20px;background:white;
+  box-shadow:0 10px 28px rgba(18,63,37,.05)
+}
+.social-profile-main{display:flex;align-items:center;gap:13px;min-width:0}
+.social-icon{
+  flex:0 0 auto;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
+  background:#eef3e9;font-size:1.35rem;font-weight:1000
+}
+.social-profile strong{display:block}
+.social-profile span{display:block;color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.social-profile .btn{padding:10px 13px;min-height:42px}
+.feed-note{
+  margin-top:14px;padding:14px 16px;border-radius:16px;background:#f4f7ef;
+  border:1px solid var(--line);color:var(--muted);font-size:.82rem
+}
+@media (max-width:980px){.posts-grid{grid-template-columns:1fr}}
+@media (max-width:650px){
+  .social-profile{align-items:flex-start;flex-direction:column}
+  .social-profile .btn{width:100%}
+}
+
+.local-map{min-height:510px;display:flex;flex-direction:column;background:#f7f4e9}
+.local-map svg{width:100%;height:445px;display:block}
+.map-actions{padding:16px 18px 18px;display:flex;justify-content:flex-end;background:#fffdf7;border-top:1px solid var(--line)}
+
+.map-note{font-size:.76rem;color:rgba(255,255,255,.58)}
+
+.review-grid{display:grid;grid-template-columns:1fr .8fr;gap:18px}
+.review blockquote{font-size:1.35rem;font-weight:850;line-height:1.45;margin:12px 0}
+.stars{color:#c4a113;letter-spacing:.1em}
+.review footer{color:var(--muted);font-size:.88rem}
+.social-card{background:var(--forest);color:white}
+.social-card p{color:rgba(255,255,255,.7)}
+.social-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+.policies-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}
+.policy-intro{background:#eaf1e5;border-radius:28px;padding:34px;align-self:start;position:sticky;top:105px}
+.policy-intro p{color:var(--muted)}
+.policy-list{display:grid;gap:11px}
+details{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:0 20px}
+summary{list-style:none;cursor:pointer;padding:19px 30px 19px 0;font-weight:950;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:1.35rem;color:var(--green)}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin-bottom:18px}
+
+.contact{background:var(--forest);color:white}
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}
+.contact-copy .kicker{color:var(--lime)}
+.contact-copy p{color:rgba(255,255,255,.7)}
+.contact-links{display:grid;gap:10px;margin-top:24px}
+.contact-link{padding:14px 16px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.05);border-radius:17px;font-weight:850}
+.contact-link span{display:block;color:rgba(255,255,255,.57);font-size:.78rem;font-weight:600}
+.form{background:white;color:var(--ink);border-radius:30px;padding:30px;box-shadow:0 25px 65px rgba(0,0,0,.18)}
+.form h3{font-size:1.55rem;margin-bottom:6px}
+.form p{color:var(--muted);font-size:.9rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{display:grid;gap:7px}
+.field.full{grid-column:1/-1}
+label{font-size:.74rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;color:#4d5a50}
+input,select,textarea{
+  width:100%;border:1px solid #d9dfd9;border-radius:14px;padding:13px 14px;background:#fffdf8;color:var(--ink);outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(114,173,45,.12)}
+textarea{min-height:115px;resize:vertical}
+.form-status{min-height:22px;font-size:.86rem;font-weight:800;margin-top:10px;color:var(--green)}
+.form .btn{width:100%;margin-top:6px}
+
+footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
+.footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:center}
+.footer-grid strong{color:white}
+.mobile-bar{display:none}
+
+@media (max-width:980px){
+  .navlinks{display:none;position:absolute;top:76px;left:0;right:0;background:var(--paper);padding:18px 20px;border-bottom:1px solid var(--line);box-shadow:0 20px 40px rgba(7,27,15,.09)}
+  .navlinks.open{display:grid;gap:15px}
+  .nav-actions .btn{display:none}
+  .menu{display:block}
+  .hero-grid{grid-template-columns:1fr;padding-top:60px}
+  .hero-art{min-height:520px}
+  .promo{grid-template-columns:1fr;gap:14px}
+  .services{grid-template-columns:repeat(2,1fr)}
+  .owner-grid,.map-grid,.review-grid,.policies-grid,.contact-grid{grid-template-columns:1fr}
+  .policy-intro{position:static}
+  .owner-photo{min-height:560px}
+}
+@media (max-width:650px){
+  .section{padding:72px 0}
+  .section-head{align-items:start;flex-direction:column}
+  .services{grid-template-columns:1fr}
+  .values{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .hero{min-height:auto}
+  .hero-grid{min-height:auto;padding:54px 0 112px}
+  .hero-art{min-height:420px}
+  .louisville-oval{right:-28%;width:145%;height:78%}
+  .owner-hero-card{right:4%;width:67%;height:76%}
+  .promo-wrap{margin-top:-38px}
+  .promo{padding:22px}
+  .owner-copy{padding:32px}
+  .ad{padding:28px;min-height:390px}
+  .footer-grid{align-items:flex-start;flex-direction:column}
+  .mobile-bar{
+    display:grid;grid-template-columns:1fr 1fr;position:fixed;z-index:120;left:12px;right:12px;bottom:12px;
+    padding:8px;background:rgba(255,253,247,.94);backdrop-filter:blur(14px);border:1px solid var(--line);
+    border-radius:20px;box-shadow:0 18px 50px rgba(7,27,15,.24);gap:8px
+  }
+  .mobile-bar .btn{padding:12px}
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">Serving <strong>&nbsp;Louisville, Kentucky&nbsp;</strong> and nearby areas • Free estimates</div></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Trent's Lawn Care home">
+      <div class="logo">TLC</div>
+      <div><strong>Trent's Lawn Care</strong><span>Owner-operated lawn service</span></div>
+    </a>
+    <nav class="navlinks" id="navLinks" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#owner">Owner</a>
+      <a href="#area">Service Area</a>
+      <a href="#posts">Posts</a>
+      <a href="#policies">Policies</a>
+      <a href="#quote">Quote</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-dark" href="tel:+15028358658">Call (502) 835-8658</a>
+      <button class="menu" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse"></span> Trent's Lawn Care • Louisville, KY</div>
+      <h1>Fresh cuts.<br>Clean yards.<br><em>Real work.</em></h1>
+      <p class="hero-lead">Reliable lawn mowing, trimming, edging, cleanup, and recurring service from a local owner who takes pride in every yard.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-lime" href="#quote">Get a Free Quote →</a>
+        <a class="btn btn-ghost" href="sms:+15028358658">Text Trent</a>
+      </div>
+      <div class="trust">
+        <span>✓ Owner-operated</span>
+        <span>✓ Respect for your property</span>
+        <span>✓ Clear communication</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-label="Trent, owner of Trent's Lawn Care, with Louisville background">
+      <div class="louisville-oval"></div>
+      <div class="owner-hero-card">
+        <img src="owner.jpg" alt="Trent, owner of Trent's Lawn Care, standing by the Louisville riverfront bridge">
+        <div class="owner-tag"><strong>Meet Trent</strong><span>Owner • Founder • Local operator</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap promo-wrap">
+  <div class="promo">
+    <div>
+      <small>Need your lawn cut?</small>
+      <h3>Call or text Trent today.</h3>
+    </div>
+    <div class="promo-points"><span>✓ Free estimates</span><span>✓ Local service</span><span>✓ Straightforward pricing</span></div>
+    <a class="btn btn-dark" href="sms:+15028358658?&body=Hi%20Trent%2C%20I%27d%20like%20a%20lawn%20care%20quote.">Request a Quote</a>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">What I do</div><h2>Lawn care that looks sharp.</h2></div>
+      <p>Simple services, clear communication, and real attention to the details that make a yard look finished.</p>
+    </div>
+    <div class="services">
+      <article class="card service-card"><div class="service-num">01</div><div class="service-icon">🌿</div><h3>Lawn Mowing</h3><p>Clean, even cuts with attention to the full yard.</p></article>
+      <article class="card service-card"><div class="service-num">02</div><div class="service-icon">✂️</div><h3>Trimming</h3><p>Weed trimming around fences, trees, beds, and hard-to-reach areas.</p></article>
+      <article class="card service-card"><div class="service-num">03</div><div class="service-icon">➖</div><h3>Edging</h3><p>Sharper lines along sidewalks and driveways for a cleaner finish.</p></article>
+      <article class="card service-card"><div class="service-num">04</div><div class="service-icon">🍂</div><h3>Yard Cleanup</h3><p>Light cleanup of leaves, sticks, clippings, and small debris.</p></article>
+      <article class="card service-card"><div class="service-num">05</div><div class="service-icon">🌳</div><h3>Bush Trimming</h3><p>Neater bushes and shrubs when added to your service.</p></article>
+      <article class="card service-card"><div class="service-num">06</div><div class="service-icon">📅</div><h3>Recurring Service</h3><p>Weekly, biweekly, or other agreed scheduling based on your yard.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section owner-section" id="owner">
+  <div class="wrap owner-grid">
+    <div class="owner-photo">
+      <img src="owner.jpg" alt="Trent, owner and founder of Trent's Lawn Care">
+      <div class="owner-photo-label"><strong>This is Trent.</strong><span>The owner and the person who created Trent's Lawn Care.</span></div>
+    </div>
+    <div class="owner-copy">
+      <div class="kicker">Meet the owner</div>
+      <h2>Built by Trent.<br>Run by Trent.</h2>
+      <p class="owner-quote">“I started Trent's Lawn Care to do honest work, help people take care of their property, and build something of my own.”</p>
+      <p>This is a real local, owner-operated business. When you call or text, you're talking directly with Trent. I take pride in the work, respect the property, and keep customers updated when weather or scheduling changes.</p>
+      <div class="values">
+        <div class="value"><strong>Local</strong><span>Based in Louisville</span></div>
+        <div class="value"><strong>Personal</strong><span>Talk directly with the owner</span></div>
+        <div class="value"><strong>Focused</strong><span>Quality over rushing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ad-section">
+  <div class="wrap">
+    <div class="ad">
+      <div class="ad-inner">
+        <span class="ad-badge">Local lawn care advertisement</span>
+        <h3>Your yard doesn't need hype. It needs work.</h3>
+        <p>Need your grass cut, trimmed, edged, or cleaned up? Send a few pictures of the yard and the service address. Trent will review it and get back to you with availability and pricing.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-lime" href="#quote">Get a Quote</a>
+          <a class="btn btn-white" href="tel:+15028358658">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="area">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Service area</div><h2>Louisville is home base.</h2></div>
+      <p>The map is intentionally broad. Exact availability depends on the job, distance, route, and schedule.</p>
+    </div>
+    <div class="map-grid">
+      <div class="area-copy">
+        <div>
+          <div class="kicker">Louisville, Kentucky</div>
+          <h3 style="font-size:2rem;margin-bottom:10px">Serving Louisville and nearby areas.</h3>
+          <p>Send the service address when asking for a quote so Trent can confirm whether the property is in the current service area.</p>
+          <div class="area-list">
+            <div><b>✓</b> Louisville</div>
+            <div><b>✓</b> Jeffersontown area</div>
+            <div><b>✓</b> Nearby neighborhoods</div>
+            <div><b>✓</b> Other locations by availability</div>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-lime" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Louisville%2C%20Kentucky">Open in Google Maps ↗</a>
+          <p class="map-note">No home address is shown on this website.</p>
+        </div>
+      </div>
+      <div class="map-box" aria-label="Google Map of Louisville, Kentucky">
+        <div class="google-map-wrap">
+          <iframe
+            title="Google Map of Louisville, Kentucky service area"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Louisville%2C%20Kentucky&z=11&output=embed">
+          </iframe>
+          <div class="google-map-badge">Google Maps • Louisville service area</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Real feedback</div><h2>What a customer said.</h2></div>
+      <p>No fake five-star names or made-up reviews.</p>
+    </div>
+    <div class="review-grid">
+      <article class="card review">
+        <div class="stars">★★★★★</div>
+        <blockquote>“Very good job. I would use you next time, maybe sooner than monthly.”</blockquote>
+        <footer>Feedback from a Trent's Lawn Care customer</footer>
+      </article>
+      <article class="card social-card">
+        <div class="kicker" style="color:var(--lime)">Follow the work</div>
+        <h3 style="font-size:1.75rem">Connect with Trent.</h3>
+        <p>See posts, real-life updates, and more from Trent's social pages.</p>
+        <div class="social-buttons">
+          <a class="btn btn-lime" target="_blank" rel="noopener" href="https://www.instagram.com/trentslawncare_/">Instagram @trentslawncare_</a>
+          <a class="btn btn-white" target="_blank" rel="noopener" href="https://www.tiktok.com/@trentlawncare">TikTok @trentlawncare</a>
+          <a class="btn btn-white" target="_blank" rel="noopener" href="https://www.youtube.com/@trentslawncare">YouTube @trentslawncare</a>
+          <a class="btn btn-white" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61563238110381">Facebook</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section class="section posts-section" id="posts">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Latest posts & videos</div>
+        <h2>See what Trent is posting.</h2>
+      </div>
+      <p>The YouTube player updates from the channel uploads. The other social buttons open the newest public posts directly on each platform.</p>
+    </div>
+
+    <div class="posts-grid">
+      <article class="embed-card">
+        <div class="kicker">YouTube • @trentslawncare</div>
+        <h3>Latest YouTube uploads</h3>
+        <p>Watch videos from Trent's Lawn Care without leaving the website.</p>
+        <div class="video-frame">
+          <iframe
+            loading="lazy"
+            src="https://www.youtube.com/embed/videoseries?list=UUuOdZlCQYYKvXiLcF8bC-Jg&rel=0"
+            title="Latest videos from Trent's Lawn Care on YouTube"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div style="margin-top:16px">
+          <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.youtube.com/@trentslawncare">Open YouTube Channel ↗</a>
+        </div>
+      </article>
+
+      <aside class="embed-card">
+        <div class="kicker">All social pages</div>
+        <h3>Follow Trent's Lawn Care</h3>
+        <p>Tap any account to see the newest posts, videos, before-and-afters, and business updates.</p>
+
+        <div class="social-stack">
+          <div class="social-profile">
+            <div class="social-profile-main">
+              <div class="social-icon">📸</div>
+              <div><strong>Instagram</strong><span>@trentslawncare_</span></div>
+            </div>
+            <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.instagram.com/trentslawncare_/">View Posts</a>
+          </div>
+
+          <div class="social-profile">
+            <div class="social-profile-main">
+              <div class="social-icon">🎵</div>
+              <div><strong>TikTok</strong><span>@trentlawncare</span></div>
+            </div>
+            <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.tiktok.com/@trentlawncare">View Videos</a>
+          </div>
+
+          <div class="social-profile">
+            <div class="social-profile-main">
+              <div class="social-icon">▶️</div>
+              <div><strong>YouTube</strong><span>@trentslawncare</span></div>
+            </div>
+            <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.youtube.com/@trentslawncare">View Channel</a>
+          </div>
+
+          <div class="social-profile">
+            <div class="social-profile-main">
+              <div class="social-icon">📘</div>
+              <div><strong>Facebook</strong><span>Trent's Lawn Care</span></div>
+            </div>
+            <a class="btn btn-dark" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61563238110381">View Facebook</a>
+          </div>
+        </div>
+
+        <div class="feed-note">
+          Social platforms control what can be shown directly inside another website. The site has a live YouTube uploads player and direct links to the newest posts on every business account.
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="policies">
+  <div class="wrap policies-grid">
+    <aside class="policy-intro">
+      <div class="kicker">Customer policies</div>
+      <h3>Clear expectations. No confusion.</h3>
+      <p>These policies help protect the customer, the property, and the schedule.</p>
+      <a class="btn btn-dark" href="#quote">Ask a Question</a>
+    </aside>
+    <div class="policy-list">
+      <details open><summary>Scheduling and arrival times</summary><p>Service dates and times are based on availability. Arrival times may shift because of weather, traffic, previous jobs, or unexpected delays. Customers will be updated about major changes.</p></details>
+      <details><summary>Weather delays</summary><p>Service may be delayed for rain, storms, wet or muddy grass, extreme heat, or other unsafe conditions. Weather-delayed work will be moved to the next reasonable available time.</p></details>
+      <details><summary>Quotes and pricing</summary><p>Pricing depends on yard size, grass height and condition, trimming needs, access, and requested services. If the property is significantly different from the original description or pictures, any major price change will be discussed before extra work is completed.</p></details>
+      <details><summary>Overgrown yards</summary><p>Very tall, thick, wet, or heavily overgrown grass may cost more because it requires additional time, equipment use, cleanup, and labor.</p></details>
+      <details><summary>Payment</summary><p>Payment is due when service is completed unless another agreement has been made beforehand.</p></details>
+      <details><summary>Property access and pets</summary><p>Please make sure gates are unlocked and the work area can be safely accessed. Pets should be kept inside or safely away from the work area while equipment is being used.</p></details>
+      <details><summary>Yard items and hidden hazards</summary><p>Please remove toys, hoses, cords, sports equipment, decorations, large rocks, branches, trash, metal, and other items that can create a hazard or be difficult to see.</p></details>
+      <details><summary>Additional work</summary><p>Bush trimming, heavy weed removal, leaf cleanup, large debris removal, extra edging, and major overgrowth cleanup are not automatically included in a standard mowing price.</p></details>
+      <details><summary>Photos</summary><p>Before-and-after photos may be taken to document work or promote the business. Exact addresses and personal information will not be posted. Customers may ask that property photos not be used for advertising.</p></details>
+      <details><summary>Customer satisfaction</summary><p>If you notice an issue with completed service, contact Trent as soon as possible so the concern can be reviewed and a fair solution can be discussed.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="quote">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <div class="kicker">Get a quote</div>
+      <h2>Send the yard details.</h2>
+      <p>Fill this out and the website will open a ready-to-send text message to Trent. No account or signup needed.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="tel:+15028358658"><strong>📞 (502) 835-8658</strong><span>Tap to call</span></a>
+        <a class="contact-link" href="sms:+15028358658"><strong>💬 Text Trent</strong><span>Best for pictures and quick quote requests</span></a>
+        <a class="contact-link" href="mailto:exetrent1@gmail.com"><strong>✉️ exetrent1@gmail.com</strong><span>Business email</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.instagram.com/trentslawncare_/"><strong>📸 @trentslawncare_</strong><span>Instagram</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.tiktok.com/@trentlawncare"><strong>🎵 @trentlawncare</strong><span>TikTok</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.youtube.com/@trentslawncare"><strong>▶️ @trentslawncare</strong><span>YouTube</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61563238110381"><strong>📘 Trent's Lawn Care</strong><span>Facebook</span></a>
+      </div>
+    </div>
+    <form class="form" id="quoteForm">
+      <h3>Free Quote Request</h3>
+      <p>Required fields are marked with an asterisk.</p>
+      <div class="form-grid">
+        <div class="field"><label for="name">Name *</label><input id="name" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel"></div>
+        <div class="field full"><label for="address">Service address *</label><input id="address" name="address" required autocomplete="street-address"></div>
+        <div class="field full"><label for="service">Service *</label>
+          <select id="service" name="service" required>
+            <option value="">Choose a service</option>
+            <option>Lawn mowing</option><option>Trimming and edging</option><option>Yard cleanup</option>
+            <option>Bush trimming</option><option>Recurring lawn service</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field full"><label for="details">Details</label><textarea id="details" name="details" placeholder="Tell Trent about the yard, grass height, gate access, and anything else that matters."></textarea></div>
+      </div>
+      <button class="btn btn-lime" type="submit">Create Text Message →</button>
+      <div class="form-status" id="formStatus" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div><strong>Trent's Lawn Care</strong><br><span>Louisville, Kentucky • Owner-operated</span></div>
+    <div>
+      <div>© <span id="year"></span> Trent's Lawn Care. All rights reserved.</div>
+      <div style="margin-top:6px;font-size:.82rem">IG @trentslawncare_ • TikTok @trentlawncare • YouTube @trentslawncare</div>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a class="btn btn-dark" href="tel:+15028358658">Call</a>
+  <a class="btn btn-lime" href="sms:+15028358658">Text</a>
+</div>
+
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuBtn.textContent = open ? '✕' : '☰';
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded','false');
+  menuBtn.textContent = '☰';
+}));
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const form = document.getElementById('quoteForm');
+const status = document.getElementById('formStatus');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const service = document.getElementById('service').value;
+  const details = document.getElementById('details').value.trim();
+
+  const message =
+`Hi Trent, I'd like a lawn care quote.
+
+Name: ${name}
+My phone: ${phone}
+Service address: ${address}
+Service: ${service}
+Details: ${details || 'No extra details yet'}
+
+I can send yard pictures too.`;
+
+  status.textContent = 'Opening your text app with the quote request ready to send...';
+  const sms = `sms:+15028358658?&body=${encodeURIComponent(message)}`;
+  window.location.href = sms;
+});
+</script>
+</body>
+</html>
