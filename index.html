@@ -251,7 +251,25 @@ summary::after{content:"+";position:absolute;right:0;top:50%;transform:translate
 details[open] summary::after{content:"–"}
 details p{color:var(--muted);margin-bottom:18px}
 
-.contact{background:var(--forest);color:white}
+.contact{
+  background:
+    linear-gradient(110deg,rgba(4,17,8,.93),rgba(7,27,15,.78)),
+    url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg') center / cover;
+  color:white;position:relative
+}
+.contact::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,17,8,.08),rgba(4,17,8,.34));pointer-events:none}
+.contact-grid{position:relative;z-index:1}
+.faith-line{display:inline-flex;align-items:center;gap:9px;margin:2px 0 20px;padding:10px 14px;border:1px solid rgba(201,239,87,.35);background:rgba(201,239,87,.12);color:#efffc7;border-radius:999px;font-size:.78rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.schedule-note{margin-top:12px!important;padding:12px 14px;border-radius:14px;background:#f3f7ed;color:#4d5a50!important;border:1px solid #d9e5ce;font-size:.82rem!important}
+.assistant-toggle{position:fixed;right:18px;bottom:20px;z-index:130;border:0;border-radius:999px;background:var(--lime);color:var(--ink);padding:14px 17px;font-weight:1000;box-shadow:0 18px 45px rgba(4,17,8,.3)}
+.assistant-panel{display:none;position:fixed;right:18px;bottom:82px;z-index:130;width:min(360px,calc(100vw - 36px));background:white;color:var(--ink);border-radius:24px;padding:22px;box-shadow:0 25px 70px rgba(4,17,8,.34);border:1px solid var(--line)}
+.assistant-panel.open{display:block}
+.assistant-panel h3{margin-bottom:6px}
+.assistant-panel p{color:var(--muted);font-size:.9rem}
+.assistant-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.assistant-options button{border:1px solid var(--line);background:#f4f7ef;border-radius:12px;padding:10px;font-weight:850;text-align:left}
+.assistant-options button:hover{border-color:var(--green)}
+@media (max-width:650px){.assistant-toggle{right:18px;bottom:92px}.assistant-panel{right:18px;bottom:150px}}
 .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}
 .contact-copy .kicker{color:var(--lime)}
 .contact-copy p{color:rgba(255,255,255,.7)}
@@ -318,7 +336,7 @@ footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
 </style>
 </head>
 <body>
-<div class="topbar"><div class="wrap">Serving <strong>&nbsp;Louisville, Kentucky&nbsp;</strong> and nearby areas • Free estimates</div></div>
+<div class="topbar"><div class="wrap"><strong>God First</strong>&nbsp;• Serving You • Caring for Your Lawn • Louisville, Kentucky</div></div>
 
 <header>
   <div class="wrap nav">
@@ -413,6 +431,62 @@ footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
         <div class="value"><strong>Focused</strong><span>Quality over rushing</span></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section contact" id="quote">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <div class="kicker">Get a quote</div>
+      <h2>Tell us what your yard needs.</h2>
+      <p>Choose the work you need, tell Trent about the yard, and request a day and time. The website will create a ready-to-send text with everything Trent needs to review your job.</p>
+      <div class="faith-line">✝ God First • Serving You • Caring for Your Lawn</div>
+      <div class="contact-links">
+        <a class="contact-link" href="tel:+15028358658"><strong>📞 (502) 835-8658</strong><span>Tap to call</span></a>
+        <a class="contact-link" href="sms:+15028358658"><strong>💬 Text Trent</strong><span>Best for pictures and quick quote requests</span></a>
+        <a class="contact-link" href="mailto:exetrent1@gmail.com"><strong>✉️ exetrent1@gmail.com</strong><span>Business email</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.instagram.com/trentslawncare_/"><strong>📸 @trentslawncare_</strong><span>Instagram</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.tiktok.com/@trentlawncare"><strong>🎵 @trentlawncare</strong><span>TikTok</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.youtube.com/@trentslawncare"><strong>▶️ @trentslawncare</strong><span>YouTube</span></a>
+        <a class="contact-link" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61563238110381"><strong>📘 Trent's Lawn Care</strong><span>Facebook</span></a>
+      </div>
+    </div>
+    <form class="form" id="quoteForm">
+      <h3>Free Quote Request</h3>
+      <p>Required fields are marked with an asterisk.</p>
+      <div class="form-grid">
+        <div class="field"><label for="name">Name *</label><input id="name" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel"></div>
+        <div class="field full"><label for="address">Service address *</label><input id="address" name="address" required autocomplete="street-address"></div>
+        <div class="field"><label for="yardSize">Yard size *</label>
+          <select id="yardSize" name="yardSize" required>
+            <option value="">Choose yard size</option><option>Small</option><option>Medium</option><option>Large</option><option>Not sure</option>
+          </select>
+        </div>
+        <div class="field"><label for="budget">Expected price / budget</label>
+          <select id="budget" name="budget">
+            <option value="">I need Trent to price it</option><option>Under $50</option><option>$50–$100</option><option>$100–$200</option><option>Over $200</option>
+          </select>
+        </div>
+        <div class="field full"><label for="service">What do you need done? *</label>
+          <select id="service" name="service" required>
+            <option value="">Choose a service</option>
+            <option>Lawn mowing</option><option>Trimming and edging</option><option>Yard cleanup</option>
+            <option>Bush trimming</option><option>Recurring lawn service</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="preferredDate">Preferred day *</label><input id="preferredDate" name="preferredDate" type="date" required></div>
+        <div class="field"><label for="preferredTime">Preferred time *</label>
+          <select id="preferredTime" name="preferredTime" required>
+            <option value="">Choose a time</option><option>Morning (8 AM–11 AM)</option><option>Midday (11 AM–2 PM)</option><option>Afternoon (2 PM–6 PM)</option><option>Any time that day</option>
+          </select>
+        </div>
+        <div class="field full"><label for="details">Tell Trent about the job</label><textarea id="details" name="details" placeholder="Describe the grass height, trimming, edging, bushes, cleanup, gate access, and anything else you want done."></textarea></div>
+      </div>
+      <p class="schedule-note">Your selected day and time are a request. The appointment is confirmed after Trent replies.</p>
+      <button class="btn btn-lime" type="submit">Send Job & Schedule Request →</button>
+      <div class="form-status" id="formStatus" aria-live="polite"></div>
+    </form>
   </div>
 </section>
 
@@ -600,43 +674,7 @@ footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
   </div>
 </section>
 
-<section class="section contact" id="quote">
-  <div class="wrap contact-grid">
-    <div class="contact-copy">
-      <div class="kicker">Get a quote</div>
-      <h2>Send the yard details.</h2>
-      <p>Fill this out and the website will open a ready-to-send text message to Trent. No account or signup needed.</p>
-      <div class="contact-links">
-        <a class="contact-link" href="tel:+15028358658"><strong>📞 (502) 835-8658</strong><span>Tap to call</span></a>
-        <a class="contact-link" href="sms:+15028358658"><strong>💬 Text Trent</strong><span>Best for pictures and quick quote requests</span></a>
-        <a class="contact-link" href="mailto:exetrent1@gmail.com"><strong>✉️ exetrent1@gmail.com</strong><span>Business email</span></a>
-        <a class="contact-link" target="_blank" rel="noopener" href="https://www.instagram.com/trentslawncare_/"><strong>📸 @trentslawncare_</strong><span>Instagram</span></a>
-        <a class="contact-link" target="_blank" rel="noopener" href="https://www.tiktok.com/@trentlawncare"><strong>🎵 @trentlawncare</strong><span>TikTok</span></a>
-        <a class="contact-link" target="_blank" rel="noopener" href="https://www.youtube.com/@trentslawncare"><strong>▶️ @trentslawncare</strong><span>YouTube</span></a>
-        <a class="contact-link" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61563238110381"><strong>📘 Trent's Lawn Care</strong><span>Facebook</span></a>
-      </div>
-    </div>
-    <form class="form" id="quoteForm">
-      <h3>Free Quote Request</h3>
-      <p>Required fields are marked with an asterisk.</p>
-      <div class="form-grid">
-        <div class="field"><label for="name">Name *</label><input id="name" name="name" required autocomplete="name"></div>
-        <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel"></div>
-        <div class="field full"><label for="address">Service address *</label><input id="address" name="address" required autocomplete="street-address"></div>
-        <div class="field full"><label for="service">Service *</label>
-          <select id="service" name="service" required>
-            <option value="">Choose a service</option>
-            <option>Lawn mowing</option><option>Trimming and edging</option><option>Yard cleanup</option>
-            <option>Bush trimming</option><option>Recurring lawn service</option><option>Other</option>
-          </select>
-        </div>
-        <div class="field full"><label for="details">Details</label><textarea id="details" name="details" placeholder="Tell Trent about the yard, grass height, gate access, and anything else that matters."></textarea></div>
-      </div>
-      <button class="btn btn-lime" type="submit">Create Text Message →</button>
-      <div class="form-status" id="formStatus" aria-live="polite"></div>
-    </form>
-  </div>
-</section>
+
 </main>
 
 <footer>
@@ -645,9 +683,23 @@ footer{background:#041108;color:rgba(255,255,255,.7);padding:30px 0 88px}
     <div>
       <div>© <span id="year"></span> Trent's Lawn Care. All rights reserved.</div>
       <div style="margin-top:6px;font-size:.82rem">IG @trentslawncare_ • TikTok @trentlawncare • YouTube @trentslawncare</div>
+      <div style="margin-top:6px;font-size:.72rem">Louisville skyline photo: <a href="https://www.goodfreephotos.com/" target="_blank" rel="noopener">Good Free Photos</a> • Public domain</div>
     </div>
   </div>
 </footer>
+
+<button class="assistant-toggle" id="assistantBtn" type="button">💬 Lawn Care Assistant</button>
+<div class="assistant-panel" id="assistantPanel" aria-live="polite">
+  <h3>Trent's Lawn Care Assistant</h3>
+  <p id="assistantReply">Hi! Choose a question below and I’ll help you get the right information.</p>
+  <div class="assistant-options">
+    <button type="button" data-answer="Pricing depends on yard size, grass height, condition, access, and the work needed. Use the quote form to send Trent the details and your budget.">How much?</button>
+    <button type="button" data-answer="Services include mowing, trimming, edging, yard cleanup, bush trimming, and recurring lawn service.">What services?</button>
+    <button type="button" data-answer="Choose a preferred day and time in the form. Trent will reply to confirm whether that appointment is available.">How do I schedule?</button>
+    <button type="button" data-answer="Yes. Yard pictures help Trent understand the job and give you a more accurate quote. You can attach them when the text message opens.">Should I send photos?</button>
+  </div>
+  <a class="btn btn-dark" href="sms:+15028358658">Text Trent Directly</a>
+</div>
 
 <div class="mobile-bar">
   <a class="btn btn-dark" href="tel:+15028358658">Call</a>
@@ -669,6 +721,19 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 }));
 
 document.getElementById('year').textContent = new Date().getFullYear();
+const preferredDateInput = document.getElementById('preferredDate');
+if (preferredDateInput) preferredDateInput.min = new Date().toISOString().split('T')[0];
+
+const assistantBtn = document.getElementById('assistantBtn');
+const assistantPanel = document.getElementById('assistantPanel');
+const assistantReply = document.getElementById('assistantReply');
+assistantBtn.addEventListener('click', () => {
+  assistantPanel.classList.toggle('open');
+  assistantBtn.textContent = assistantPanel.classList.contains('open') ? '✕ Close Assistant' : '💬 Lawn Care Assistant';
+});
+document.querySelectorAll('.assistant-options button').forEach(button => {
+  button.addEventListener('click', () => { assistantReply.textContent = button.dataset.answer; });
+});
 
 const form = document.getElementById('quoteForm');
 const status = document.getElementById('formStatus');
@@ -678,7 +743,11 @@ form.addEventListener('submit', (e) => {
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const address = document.getElementById('address').value.trim();
+  const yardSize = document.getElementById('yardSize').value;
+  const budget = document.getElementById('budget').value;
   const service = document.getElementById('service').value;
+  const preferredDate = document.getElementById('preferredDate').value;
+  const preferredTime = document.getElementById('preferredTime').value;
   const details = document.getElementById('details').value.trim();
 
   const message =
@@ -687,8 +756,12 @@ form.addEventListener('submit', (e) => {
 Name: ${name}
 My phone: ${phone}
 Service address: ${address}
-Service: ${service}
-Details: ${details || 'No extra details yet'}
+Yard size: ${yardSize}
+What I need done: ${service}
+Expected price / budget: ${budget || 'I need a quote'}
+Requested day: ${preferredDate}
+Requested time: ${preferredTime}
+Job details: ${details || 'No extra details yet'}
 
 I can send yard pictures too.`;
 
