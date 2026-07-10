@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://exetrent.github.io/Trent-s-lawn-care.con/sitemap.xml
+Sitemap: https://trentslawncare.com/sitemap.xml
