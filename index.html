@@ -391,20 +391,26 @@ body{
     url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg') center / cover fixed;
 }
 body::before{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
     radial-gradient(circle at 18% 18%,rgba(201,239,87,.20),transparent 28%),
     radial-gradient(circle at 82% 62%,rgba(114,173,45,.18),transparent 31%),
     linear-gradient(135deg,rgba(4,17,8,.35),rgba(12,46,25,.16));
 }
+body::after{
+  content:"LOUISVILLE, KENTUCKY\A LOCAL LAWN CARE";
+  white-space:pre;position:fixed;z-index:-1;right:3vw;bottom:4vh;pointer-events:none;
+  color:rgba(255,255,255,.12);font-weight:1000;font-size:clamp(2.2rem,7vw,7rem);
+  line-height:.82;letter-spacing:-.06em;text-align:right;text-transform:uppercase
+}
 main{position:relative;isolation:isolate}
 main>.section{
   width:min(1240px,calc(100% - 24px));margin:22px auto;border-radius:38px;
-  background:rgba(246,242,231,.92);backdrop-filter:blur(13px);
+  background:rgba(246,242,231,.84);backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,.52);
   box-shadow:0 35px 90px rgba(2,14,7,.28);
 }
-main>.owner-section,main>.posts-section{background:rgba(234,241,229,.93)}
+main>.owner-section,main>.posts-section{background:rgba(234,241,229,.87)}
 .hero{
   width:min(1340px,calc(100% - 18px));margin:10px auto 0;border-radius:0 0 44px 44px;
   background:
