@@ -498,6 +498,19 @@ p,.section-head p,.service-card p{color:rgba(38,52,42,.88)}
 .hero p,.contact p,.owner-copy p,.ad p{color:rgba(255,255,255,.80)}
 @media(max-width:650px){body{background:linear-gradient(rgba(3,18,9,.38),rgba(4,24,12,.24)),var(--bridge-image) center/cover scroll}}
 
+
+/* BRIDGE SPOTLIGHT */
+.bridge-showcase{width:min(1340px,calc(100% - 18px));min-height:580px;margin:24px auto;border-radius:42px;position:relative;overflow:hidden;background:var(--bridge-image) center 48%/cover no-repeat;box-shadow:0 38px 100px rgba(2,14,7,.42);border:2px solid rgba(201,239,87,.48)}
+.bridge-showcase::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(3,18,9,.72) 100%)}
+.bridge-label{position:absolute;z-index:2;left:28px;right:28px;bottom:28px;display:flex;justify-content:space-between;align-items:end;gap:24px;padding:22px 24px;border-radius:24px;background:rgba(4,17,8,.42);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.26);color:white}
+.bridge-label h2{color:white;text-shadow:0 3px 24px rgba(0,0,0,.5);margin:0;font-size:clamp(2rem,5vw,4.6rem)}
+.bridge-label p{max-width:470px;color:rgba(255,255,255,.88);margin:0}
+main>.section{background:rgba(246,242,231,.56);backdrop-filter:blur(5px) saturate(1.08)}
+main>.owner-section,main>.posts-section{background:rgba(234,241,229,.61)}
+.card,.form,.embed-card,.social-profile,.policy-intro,details,.map-box{background:rgba(255,253,247,.69);backdrop-filter:blur(7px)}
+.hero{background:linear-gradient(90deg,rgba(4,17,8,.88) 0%,rgba(7,35,18,.50) 52%,rgba(7,27,15,.10) 100%),var(--bridge-image) center 48%/cover}
+@media(max-width:700px){.bridge-showcase{min-height:500px;border-radius:28px;background-position:55% 50%}.bridge-label{left:14px;right:14px;bottom:14px;padding:18px;display:block}.bridge-label p{margin-top:10px}}
+
 </style>
 </head>
 <body>
@@ -563,6 +576,17 @@ p,.section-head p,.service-card p{color:rgba(38,52,42,.88)}
   </div>
 </div>
 
+
+
+<section class="bridge-showcase" id="bridge-showcase" aria-label="Lewis and Clark Bridge near Prospect and Louisville, Kentucky">
+  <div class="bridge-label">
+    <div>
+      <div class="kicker" style="color:var(--lime)">Proudly serving the Louisville area</div>
+      <h2>Prospect • Louisville, Kentucky</h2>
+    </div>
+    <p>The real Lewis &amp; Clark Bridge over the Ohio River near Prospect and eastern Louisville—part of the community Trent's Lawn Care serves.</p>
+  </div>
+</section>
 
 <section class="section" id="business-card">
   <div class="wrap business-card-showcase">
