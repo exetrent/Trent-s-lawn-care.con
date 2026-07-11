@@ -922,6 +922,40 @@ body::before{
   }
 }
 
+
+
+/* CLEAN MAIN PHOTO HERO */
+.hero{
+  background:
+    radial-gradient(circle at 80% 20%,rgba(126,255,114,.16),transparent 28%),
+    linear-gradient(120deg,#03160a 0%,#082f19 58%,#04190d 100%);
+}
+.hero-grid{grid-template-columns:minmax(0,.9fr) minmax(380px,1.1fr);align-items:center;gap:clamp(28px,5vw,72px)}
+.clean-hero-art{min-height:680px;display:flex;align-items:center;justify-content:center}
+.hero-main-photo{
+  position:relative;width:100%;height:650px;overflow:hidden;border-radius:40px;
+  border:1px solid rgba(216,255,99,.62);
+  box-shadow:0 34px 90px rgba(0,0,0,.48),0 0 36px rgba(80,255,120,.22);
+}
+.hero-main-photo img{width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.hero-main-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(2,17,8,.86));pointer-events:none}
+.hero-main-badge{
+  position:absolute;z-index:3;left:24px;right:24px;bottom:24px;padding:17px 19px;border-radius:20px;
+  color:white;background:rgba(2,18,9,.65);border:1px solid rgba(216,255,99,.44);
+  box-shadow:0 0 24px rgba(80,255,120,.2);backdrop-filter:blur(10px)
+}
+.hero-main-badge strong{display:block;color:#d8ff63;text-transform:uppercase;letter-spacing:.1em;text-shadow:0 0 14px rgba(126,255,114,.65)}
+.hero-main-badge span{display:block;margin-top:4px;color:rgba(255,255,255,.86)}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .clean-hero-art{min-height:auto}
+  .hero-main-photo{height:min(680px,122vw)}
+}
+@media(max-width:760px){
+  .hero{background:linear-gradient(145deg,#03160a,#082f19 60%,#04190d)}
+  .hero-main-photo{border-radius:28px;height:min(650px,130vw)}
+}
+
 </style>
 </head>
 <body>
@@ -966,11 +1000,10 @@ body::before{
         <span>✓ Clear communication</span>
       </div>
     </div>
-    <div class="hero-art" aria-label="Trent, owner of Trent's Lawn Care, with Louisville background">
-      <div class="louisville-oval"></div>
-      <div class="owner-hero-card">
-        <img src="owner.jpg" alt="Trent, owner of Trent's Lawn Care, standing by the Louisville riverfront bridge">
-        <div class="owner-tag"><strong>Meet Trent</strong><span>Owner • Founder • Local operator</span></div>
+    <div class="hero-art clean-hero-art" aria-label="Trent, owner of Trent's Lawn Care">
+      <div class="hero-main-photo led-frame">
+        <img src="/trent-main-share.jpg" alt="Trent, owner and founder of Trent's Lawn Care">
+        <div class="hero-main-badge"><strong>Meet Trent</strong><span>Owner • Founder • Louisville, Kentucky</span></div>
       </div>
     </div>
   </div>
