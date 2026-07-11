@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="pr8QmcGOKgpNFF0LYhubZPXIDva9P9X6iw5P4hIhNow" />
 <meta name="theme-color" content="#071b0f">
-<meta name="site-build" content="2026-07-10-secure-domain-refresh">
+<meta name="site-build" content="2026-07-11-main-photo-share-preview">
 <title>Trent's Lawn Care | Louisville, Kentucky</title>
 <meta name="description" content="Owner-operated lawn care in Louisville, Kentucky. Lawn mowing, trimming, edging, cleanup, and recurring service.">
 <link rel="canonical" href="https://trentslawncare.com/">
@@ -16,14 +16,23 @@
 <meta property="og:title" content="Trent's Lawn Care | Louisville, Kentucky">
 <meta property="og:description" content="Local lawn mowing, trimming, edging, cleanup, bush trimming, and recurring service in Louisville, Kentucky.">
 <meta property="og:url" content="https://trentslawncare.com/">
-<meta property="og:image" content="https://trentslawncare.com/owner.jpg">
+<meta property="og:image" content="https://trentslawncare.com/trent-main-share.jpg">
+<meta property="og:image:secure_url" content="https://trentslawncare.com/trent-main-share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="520">
+<meta property="og:image:height" content="693">
+<meta property="og:image:alt" content="Trent, owner of Trent's Lawn Care">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trent's Lawn Care | Louisville, Kentucky">
+<meta name="twitter:description" content="Local, owner-operated lawn care serving Louisville, Kentucky.">
+<meta name="twitter:image" content="https://trentslawncare.com/trent-main-share.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Trent's Lawn Care",
   "url": "https://trentslawncare.com/",
-  "image": "https://trentslawncare.com/owner.jpg",
+  "image": "https://trentslawncare.com/trent-main-share.jpg",
   "telephone": "+1-502-835-8658",
   "email": "exetrent1@gmail.com",
   "description": "Owner-operated lawn care serving Louisville, Kentucky, including mowing, trimming, edging, cleanup, bush trimming, and recurring service.",
@@ -896,6 +905,22 @@ body::before{
 .trent-gallery-btn:hover,.trent-gallery-btn:focus-visible{transform:scale(1.08)}
 .trent-gallery-count{min-width:42px;color:#f4ffe6;font-size:.78rem;font-weight:950;text-align:center;text-shadow:0 0 10px #70ff79}
 @media(prefers-reduced-motion:reduce){.trent-slide{transition:none}}
+
+
+
+/* MAIN FRONT PAGE OWNER PHOTO */
+.hero{
+  background:
+    linear-gradient(100deg,rgba(2,14,7,.95) 0%,rgba(4,27,14,.78) 43%,rgba(3,20,10,.24) 76%),
+    url('/trent-main-share.jpg') center 38% / cover no-repeat;
+}
+@media(max-width:760px){
+  .hero{
+    background:
+      linear-gradient(180deg,rgba(2,14,7,.72) 0%,rgba(2,18,9,.4) 42%,rgba(2,14,7,.92) 82%),
+      url('/trent-main-share.jpg') center 28% / cover no-repeat;
+  }
+}
 
 </style>
 </head>
