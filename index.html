@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="pr8QmcGOKgpNFF0LYhubZPXIDva9P9X6iw5P4hIhNow" />
 <meta name="theme-color" content="#071b0f">
-<meta name="site-build" content="2026-07-14-formspree-live-endpoint">
+<meta name="site-build" content="2026-07-14-chatbase-ai-assistant">
 <title>Official Trent's Lawn Care | Louisville Lawn Mowing & Yard Care</title>
 <meta name="description" content="Official website of Trent's Lawn Care in Louisville, Kentucky. Request lawn mowing, trimming, edging, yard cleanup, bush trimming, and recurring lawn service.">
 <link rel="canonical" href="https://trentslawncare.com/">
@@ -313,15 +313,6 @@ details p{color:var(--muted);margin-bottom:18px}
 .contact-grid{position:relative;z-index:1}
 .faith-line{display:inline-flex;align-items:center;gap:9px;margin:2px 0 20px;padding:10px 14px;border:1px solid rgba(201,239,87,.35);background:rgba(201,239,87,.12);color:#efffc7;border-radius:999px;font-size:.78rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
 .schedule-note{margin-top:12px!important;padding:12px 14px;border-radius:14px;background:#f3f7ed;color:#4d5a50!important;border:1px solid #d9e5ce;font-size:.82rem!important}
-.assistant-toggle{position:fixed;right:18px;bottom:20px;z-index:130;border:0;border-radius:999px;background:var(--lime);color:var(--ink);padding:14px 17px;font-weight:1000;box-shadow:0 18px 45px rgba(4,17,8,.3)}
-.assistant-panel{display:none;position:fixed;right:18px;bottom:82px;z-index:130;width:min(360px,calc(100vw - 36px));background:white;color:var(--ink);border-radius:24px;padding:22px;box-shadow:0 25px 70px rgba(4,17,8,.34);border:1px solid var(--line)}
-.assistant-panel.open{display:block}
-.assistant-panel h3{margin-bottom:6px}
-.assistant-panel p{color:var(--muted);font-size:.9rem}
-.assistant-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
-.assistant-options button{border:1px solid var(--line);background:#f4f7ef;border-radius:12px;padding:10px;font-weight:850;text-align:left}
-.assistant-options button:hover{border-color:var(--green)}
-@media (max-width:650px){.assistant-toggle{right:18px;bottom:92px}.assistant-panel{right:18px;bottom:150px}}
 .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}
 .contact-copy .kicker{color:var(--lime)}
 .contact-copy p{color:rgba(255,255,255,.7)}
@@ -1015,7 +1006,7 @@ body::before{background:none!important}
 .form-actions .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .form-guarantee{display:flex;align-items:flex-start;gap:10px;margin-top:17px;padding:14px;border-radius:15px;background:#edf6dc;color:#174e2b}.form-guarantee .ui-icon{margin-top:2px}
 .form-status.error{color:#a52a2a}.form-status.sending{color:#174e2b}.form-status.success{color:#0b6b32}.form-backup{display:none;flex-wrap:wrap;gap:10px;margin-top:14px;padding:14px;border:1px solid rgba(165,42,42,.22);border-radius:15px;background:#fff7f2}.form-backup.show{display:flex}.form-backup p{flex-basis:100%;margin:0;color:#6d3429;font-size:.86rem;font-weight:750}
-.assistant-toggle{display:flex;align-items:center;gap:8px}.assistant-toggle .ui-icon{width:20px;height:20px}.mobile-bar{grid-template-columns:repeat(3,1fr)!important}
+.mobile-bar{grid-template-columns:repeat(3,1fr)!important}
 .footer-grid span .ui-icon{width:16px;height:16px;vertical-align:-3px;color:var(--lime)}
 @media(max-width:980px){.official-proof-grid{grid-template-columns:1fr}.proof-item{border-right:0;border-bottom:1px solid rgba(7,27,15,.1)}.proof-item:last-child{border-bottom:0}.modern-menu{display:block}}
 @media(max-width:650px){.form-steps{grid-template-columns:1fr}.official-site-badge{margin-inline:auto}.proof-item{padding:14px 4px}}
@@ -1065,6 +1056,11 @@ body{
   .hero-identity{grid-template-columns:1fr;gap:8px}
   .identity-card{min-height:auto}
   .live-clock{font-size:.72rem}
+}
+/* CHATBASE REAL AI ASSISTANT */
+@media(max-width:650px){
+  #chatbase-bubble-button{bottom:92px!important;right:18px!important}
+  #chatbase-bubble-window{bottom:148px!important;right:10px!important;max-height:calc(100dvh - 166px)!important}
 }
 </style>
 </head>
@@ -1500,19 +1496,6 @@ body{
   </div>
 </footer>
 
-<button class="assistant-toggle" id="assistantBtn" type="button"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/></svg><span class="assistant-label">Lawn Care Assistant</span></button>
-<div class="assistant-panel" id="assistantPanel" aria-live="polite">
-  <h3>Trent's Lawn Care Assistant</h3>
-  <p id="assistantReply">Hi! Choose a question below and I’ll help you get the right information.</p>
-  <div class="assistant-options">
-    <button type="button" data-answer="Pricing depends on yard size, grass height, condition, access, and the work needed. Use the quote form to send Trent the details and your budget.">How much?</button>
-    <button type="button" data-answer="Services include mowing, trimming, edging, yard cleanup, bush trimming, and recurring lawn service.">What services?</button>
-    <button type="button" data-answer="Choose a preferred day and time in the form. Trent will reply to confirm whether that appointment is available.">How do I schedule?</button>
-    <button type="button" data-answer="Yes. Yard pictures help Trent understand the job and give you a more accurate quote. Use the optional photo upload inside the website form.">Should I send photos?</button>
-  </div>
-  <a class="btn btn-dark" href="sms:+15028358658">Text Trent Directly</a>
-</div>
-
 <div class="mobile-bar">
   <a class="btn btn-lime" href="#quote">Quote</a>
   <a class="btn btn-dark" href="tel:+15028358658">Call</a>
@@ -1538,19 +1521,6 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 document.getElementById('year').textContent = new Date().getFullYear();
 const preferredDateInput = document.getElementById('preferredDate');
 if (preferredDateInput) preferredDateInput.min = new Date().toISOString().split('T')[0];
-
-const assistantBtn = document.getElementById('assistantBtn');
-const assistantPanel = document.getElementById('assistantPanel');
-const assistantReply = document.getElementById('assistantReply');
-assistantBtn.addEventListener('click', () => {
-  assistantPanel.classList.toggle('open');
-  const isOpen = assistantPanel.classList.contains('open');
-  assistantBtn.classList.toggle('open', isOpen);
-  assistantBtn.querySelector('.assistant-label').textContent = isOpen ? 'Close Assistant' : 'Lawn Care Assistant';
-});
-document.querySelectorAll('.assistant-options button').forEach(button => {
-  button.addEventListener('click', () => { assistantReply.textContent = button.dataset.answer; });
-});
 
 const form = document.getElementById('quoteForm');
 const status = document.getElementById('formStatus');
@@ -1768,6 +1738,9 @@ calendarBtn.addEventListener('click', () => {
   tick();
   setInterval(tick, 1000);
 })();
+</script>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="UXhr7fcUGsCb-IP_Hj1w4";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
 </body>
 </html>
