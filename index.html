@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="pr8QmcGOKgpNFF0LYhubZPXIDva9P9X6iw5P4hIhNow" />
 <meta name="theme-color" content="#071b0f">
-<meta name="site-build" content="2026-07-14-football-louisville-refresh">
+<meta name="site-build" content="2026-07-14-form-500-fallback-fix">
 <title>Official Trent's Lawn Care | Louisville Lawn Mowing & Yard Care</title>
 <meta name="description" content="Official website of Trent's Lawn Care in Louisville, Kentucky. Request lawn mowing, trimming, edging, yard cleanup, bush trimming, and recurring lawn service.">
 <link rel="canonical" href="https://trentslawncare.com/">
@@ -1014,7 +1014,7 @@ body::before{background:none!important}
 .upload-field{padding:15px;border:1px dashed rgba(7,74,38,.34);border-radius:16px;background:rgba(233,245,214,.52)}.upload-field label{display:flex;align-items:center;gap:8px}.upload-field input{padding:10px;background:white}.upload-field small{display:block;color:var(--muted);margin-top:7px}
 .form-actions .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .form-guarantee{display:flex;align-items:flex-start;gap:10px;margin-top:17px;padding:14px;border-radius:15px;background:#edf6dc;color:#174e2b}.form-guarantee .ui-icon{margin-top:2px}
-.form-status.error{color:#a52a2a}.form-status.sending{color:#174e2b}
+.form-status.error{color:#a52a2a}.form-status.sending{color:#174e2b}.form-status.success{color:#0b6b32}.form-backup{display:none;flex-wrap:wrap;gap:10px;margin-top:14px;padding:14px;border:1px solid rgba(165,42,42,.22);border-radius:15px;background:#fff7f2}.form-backup.show{display:flex}.form-backup p{flex-basis:100%;margin:0;color:#6d3429;font-size:.86rem;font-weight:750}
 .assistant-toggle{display:flex;align-items:center;gap:8px}.assistant-toggle .ui-icon{width:20px;height:20px}.mobile-bar{grid-template-columns:repeat(3,1fr)!important}
 .footer-grid span .ui-icon{width:16px;height:16px;vertical-align:-3px;color:var(--lime)}
 @media(max-width:980px){.official-proof-grid{grid-template-columns:1fr}.proof-item{border-right:0;border-bottom:1px solid rgba(7,27,15,.1)}.proof-item:last-child{border-bottom:0}.modern-menu{display:block}}
@@ -1267,7 +1267,7 @@ body{
         <a class="contact-link" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61563238110381"><strong class="contact-title"><span class="brand-f-icon" aria-hidden="true">f</span><span>Trent's Lawn Care</span></strong><span>Facebook</span></a>
       </div>
     </div>
-    <form class="form reliable-quote-form" id="quoteForm" action="https://formsubmit.co/exetrent1@gmail.com" method="POST" enctype="multipart/form-data">
+    <form class="form reliable-quote-form" id="quoteForm" action="https://formsubmit.co/ajax/exetrent1@gmail.com" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="_subject" value="New Trent's Lawn Care Website Request">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -1315,14 +1315,15 @@ body{
         <div class="field full upload-field"><label for="yardPhoto"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 20h14"/></svg><span>Add a yard photo (optional)</span></label><input id="yardPhoto" name="attachment" type="file" accept="image/jpeg,image/png,image/webp"><small>One JPG, PNG, or WebP photo. Maximum total upload size: 10 MB.</small></div>
       </div>
       <p class="schedule-note">Your selected day and time are a request. The appointment is confirmed after Trent replies.</p>
-      <p class="submit-privacy">Your request is submitted through FormSubmit and emailed to Trent's Lawn Care. Your contact and property details are used only to respond to this request.</p>
+      <p class="submit-privacy">Your request is emailed to Trent's Lawn Care. Your contact and property details are used only to respond to this request.</p>
       <div class="form-actions">
         <button class="btn btn-lime" type="submit" id="submitRequestBtn"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg><span>Send My Quote Request</span></button>
         <button class="btn btn-calendar" type="button" id="calendarBtn"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="m8 15 2 2 5-5"/></svg><span>Preview in Google Calendar</span></button>
         <a class="btn btn-dark" href="tel:+15028358658">Call (502) 835-8658</a>
       </div>
       <div class="form-status" id="formStatus" aria-live="polite"></div>
-      <div class="form-guarantee"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Works on phones and computers.</strong> You will see a confirmation page after the request is sent.</span></div>
+      <div class="form-backup" id="formBackup" aria-live="polite"><p>The online form did not send. Choose a backup option so Trent still receives your request. Add your yard photo inside the email or text message.</p><a class="btn btn-dark" id="emailRequestBtn" href="mailto:exetrent1@gmail.com">Email Request</a><a class="btn btn-lime" id="textRequestBtn" href="sms:+15028358658">Text Request</a></div>
+      <div class="form-guarantee"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Works on phones and computers.</strong> The form stays on this website and shows whether the request was sent.</span></div>
     </form>
   </div>
 </section>
@@ -1559,6 +1560,9 @@ const form = document.getElementById('quoteForm');
 const status = document.getElementById('formStatus');
 const calendarBtn = document.getElementById('calendarBtn');
 const submitRequestBtn = document.getElementById('submitRequestBtn');
+const formBackup = document.getElementById('formBackup');
+const emailRequestBtn = document.getElementById('emailRequestBtn');
+const textRequestBtn = document.getElementById('textRequestBtn');
 
 function getQuoteDetails() {
   return {
@@ -1582,16 +1586,63 @@ function requireValidForm() {
   }
   return true;
 }
-form.addEventListener('submit', () => {
-  if (!form.checkValidity()) return;
+function quoteMessage(d) {
+  return [
+    "Trent's Lawn Care Quote Request",
+    'Name: ' + d.name,
+    'Phone: ' + d.phone,
+    'Email: ' + d.email,
+    'Service address: ' + d.address,
+    'Yard size: ' + d.yardSize,
+    'Budget: ' + (d.budget || 'Needs quote'),
+    'Service: ' + d.service,
+    'Preferred date: ' + d.preferredDate,
+    'Preferred time: ' + d.preferredTime,
+    'Job details: ' + (d.details || 'No extra details'),
+    '',
+    'Please reply to confirm the date, time, and price.'
+  ].join('\n');
+}
+function prepareBackupLinks(d) {
+  const message = quoteMessage(d);
+  emailRequestBtn.href = 'mailto:exetrent1@gmail.com?subject=' + encodeURIComponent("Trent's Lawn Care Quote Request") + '&body=' + encodeURIComponent(message);
+  textRequestBtn.href = 'sms:+15028358658?&body=' + encodeURIComponent(message);
+}
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!requireValidForm()) return;
+  const details = getQuoteDetails();
+  prepareBackupLinks(details);
+  formBackup.classList.remove('show');
   submitRequestBtn.disabled = true;
   submitRequestBtn.querySelector('span').textContent = 'Sending Request...';
-  status.textContent = 'Sending securely to Trent’s Lawn Care...';
+  status.textContent = 'Sending your request to Trent’s Lawn Care...';
   status.className = 'form-status sending';
-  setTimeout(() => {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' },
+      signal: controller.signal
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success === false || result.success === 'false') {
+      throw new Error('Request service unavailable');
+    }
+    status.textContent = 'Request sent! Trent’s Lawn Care will review it and reply to confirm the date, time, and price.';
+    status.className = 'form-status success';
+    form.reset();
+  } catch (error) {
+    status.textContent = 'The online form service is temporarily unavailable, so your request was not sent. Use Email Request or Text Request below.';
+    status.className = 'form-status error';
+    formBackup.classList.add('show');
+  } finally {
+    clearTimeout(timer);
     submitRequestBtn.disabled = false;
     submitRequestBtn.querySelector('span').textContent = 'Send My Quote Request';
-  }, 12000);
+  }
 });
 function calendarStamp(date, time) {
   return date.replace(/-/g, '') + 'T' + time.replace(':', '') + '00';
