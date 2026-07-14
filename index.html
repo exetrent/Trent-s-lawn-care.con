@@ -1204,6 +1204,19 @@ main>.section>.wrap,.owner-section>.wrap,.posts-section>.wrap{
   main>.section>.wrap,.owner-section>.wrap,.posts-section>.wrap{border-radius:22px;padding:20px}
   .card,.service-card,.embed-card{box-shadow:6px 7px 0 rgba(0,28,15,.55),0 16px 30px rgba(0,0,0,.22)!important}
 }
+
+/* CONTRAST-FIX-2026-07-14 */
+header .brand strong,
+header .brand span,
+header .navlinks a,
+header .menu{
+  color:var(--ink)!important;
+}
+header .brand span{opacity:.82}
+header .navlinks a:hover{color:var(--green)!important}
+.official-site-badge{color:var(--ink)!important;background:rgba(255,253,247,.92)!important;border-color:rgba(183,223,73,.85)!important}
+.hero .eyebrow{color:#efffc7!important}
+.business-card-copy,.business-card-copy h2,.business-card-copy p{color:var(--ink)!important}
 </style>
 </head>
 <body>
