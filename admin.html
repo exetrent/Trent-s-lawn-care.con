@@ -5,69 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#071b0f">
-<title>Owner Admin | Trent's Lawn Care</title>
+<title>Private Owner Dashboard | Trent's Lawn Care</title>
 <style>
-:root{--ink:#071b0f;--forest:#123d22;--lime:#c9ef57;--cream:#f6f2e7;--white:#fff;--muted:#b8c5bb;--line:rgba(255,255,255,.16)}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;color:white;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(rgba(3,16,8,.9),rgba(7,27,15,.82)),url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg') center/cover fixed;padding:20px}
-.portal{width:min(1050px,100%);margin:auto;padding:28px;border-radius:30px;background:rgba(7,27,15,.9);backdrop-filter:blur(18px);border:1px solid var(--line);box-shadow:0 35px 100px rgba(0,0,0,.45)}
-.top{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}.logo{width:95px;height:95px;object-fit:cover;border-radius:22px;background:#faf7e9;padding:4px}.badge{display:inline-flex;padding:8px 12px;border-radius:999px;background:rgba(201,239,87,.13);border:1px solid rgba(201,239,87,.35);color:#efffc7;font-size:.73rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-h1{font-size:clamp(2.2rem,7vw,4.7rem);line-height:.92;letter-spacing:-.055em;text-transform:uppercase;margin:14px 0 8px}.lead{color:rgba(255,255,255,.72);line-height:1.6;max-width:760px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0}.card{padding:19px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid var(--line);transition:.2s ease;text-decoration:none;color:inherit}.card:hover{transform:translateY(-3px);background:rgba(255,255,255,.11)}.card strong{display:block;color:var(--lime);font-size:1.02rem;margin-bottom:5px}.card span{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.4}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:16px}.tool{padding:22px;border-radius:24px;background:rgba(255,255,255,.07);border:1px solid var(--line)}.tool h2{margin:0 0 8px}.tool p{color:rgba(255,255,255,.66);font-size:.88rem;line-height:1.5}.tool label{display:block;margin:12px 0 6px;font-size:.73rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--lime)}
-.tool input,.tool textarea,.tool select{width:100%;border:1px solid rgba(255,255,255,.2);border-radius:13px;padding:12px 13px;background:rgba(255,255,255,.08);color:white;font:inherit;outline:none}.tool select option{color:#071b0f}.tool textarea{min-height:105px;resize:vertical}.templates,.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.templates button,.action{border:1px solid rgba(201,239,87,.28);background:rgba(201,239,87,.10);color:#efffc7;border-radius:999px;padding:9px 11px;font-weight:800;cursor:pointer;text-decoration:none}.primary{border:0;border-radius:999px;background:var(--lime);color:var(--ink);padding:12px 16px;font-weight:950;cursor:pointer}.status{min-height:22px;color:var(--lime);font-size:.82rem;margin-top:10px}.note{padding:14px 16px;border-radius:15px;background:rgba(201,239,87,.1);border:1px solid rgba(201,239,87,.25);font-size:.82rem;line-height:1.5;margin-top:18px}.back{display:inline-flex;margin-top:18px;padding:12px 16px;border-radius:999px;background:var(--lime);color:var(--ink);font-weight:950;text-decoration:none}
-@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.tools{grid-template-columns:1fr}}@media(max-width:560px){body{padding:9px}.portal{padding:20px}.grid{grid-template-columns:1fr}.logo{width:76px;height:76px}}
-</style>
-</head>
-<body>
-<main class="portal">
-  <div class="top"><div><div class="badge">Owner access • Trent's Lawn Care</div><h1>Admin Portal</h1><p class="lead">Your owner dashboard for customer scheduling, quote requests, calendar, messages, directions, and website management.</p></div><img class="logo" src="business-card.png" alt="Trent's Lawn Care"></div>
-
-  <div class="grid">
-    <a class="card" href="/scheduler.html"><strong>📆 Customer Scheduler</strong><span>Add customers and create one-time or repeating lawn appointments.</span></a>
-    <a class="card" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener"><strong>🗓️ Full Google Calendar</strong><span>Review, move, edit, or cancel scheduled jobs.</span></a>
-    <a class="card" href="https://mail.google.com/mail/u/0/#search/%22New+Trent%27s+Lawn+Care+Website+Request%22" target="_blank" rel="noopener"><strong>📥 Quote Requests</strong><span>Open customer requests sent from the website.</span></a>
-    <a class="card" href="https://mail.google.com/" target="_blank" rel="noopener"><strong>✉️ Business Email</strong><span>Open your Gmail business inbox.</span></a>
-    <a class="card" href="https://www.google.com/maps" target="_blank" rel="noopener"><strong>📍 Maps & Routes</strong><span>Get directions and plan your lawn-care route.</span></a>
-    <a class="card" href="https://github.com/Trentlawn/Trent-s-lawn-care.con" target="_blank" rel="noopener"><strong>⚙️ Website Files</strong><span>Open the website repository and update files.</span></a>
-  </div>
-
-  <div class="tools">
-    <section class="tool">
-      <h2>Quick Customer Reply</h2>
-      <p>Choose a message, edit it, and open it in your text app.</p>
-      <label for="replyPhone">Customer phone number</label><input id="replyPhone" inputmode="tel" placeholder="502-555-1234">
-      <label for="replyMessage">Reply message</label><textarea id="replyMessage">Hi, this is Trent with Trent's Lawn Care. I received your request and I’m reviewing the yard details, schedule, and price. I’ll confirm everything with you shortly. Thank you.</textarea>
-      <div class="templates">
-        <button type="button" data-message="Hi, this is Trent with Trent's Lawn Care. I received your request and I’m reviewing the yard details, schedule, and price. I’ll confirm everything with you shortly. Thank you.">Request received</button>
-        <button type="button" data-message="Hi, this is Trent with Trent's Lawn Care. Your lawn service is confirmed for Friday after 5:00 PM. I’ll mow, weed eat, edge, and clean up the yard. Thank you.">Friday confirmed</button>
-        <button type="button" data-message="Hi, this is Trent with Trent's Lawn Care. Your lawn service is scheduled every two weeks on Friday after 5:00 PM. I’ll keep you updated if weather causes a delay. Thank you.">Every 2 weeks</button>
-        <button type="button" data-message="Hi, this is Trent with Trent's Lawn Care. Because of the weather, I need to move your lawn service. I’ll send you the next available day and keep you updated. Thank you for understanding.">Weather delay</button>
-        <button type="button" data-message="Hi, this is Trent with Trent's Lawn Care. I’m on the way and should arrive shortly. Please make sure the gate is unlocked and pets are safely inside. Thank you.">On my way</button>
-        <button type="button" data-message="Hi, this is Trent with Trent's Lawn Care. The lawn service is finished. Please take a look when you get a chance and let me know if everything looks good. Thank you.">Job finished</button>
-      </div>
-      <button class="primary" id="sendReply" type="button">Open Reply Text →</button><div class="status" id="replyStatus"></div>
-    </section>
-
-    <section class="tool">
-      <h2>Quick Job Command</h2>
-      <p>Create a clean job summary you can copy into your calendar notes.</p>
-      <label for="jobCustomer">Customer</label><input id="jobCustomer" placeholder="Customer name">
-      <label for="jobAddress">Address</label><input id="jobAddress" placeholder="Service address">
-      <label for="jobType">Job type</label><select id="jobType"><option>Mow, weed eat, edge, and cleanup</option><option>Mowing and trimming</option><option>Mulch installation</option><option>Hedge and shrub pruning</option><option>Seasonal cleanup</option><option>Other lawn work</option></select>
-      <label for="jobPrice">Price</label><input id="jobPrice" inputmode="decimal" placeholder="$50">
-      <label for="jobNotes">Extra notes</label><textarea id="jobNotes" placeholder="Gate, pets, payment, special areas, etc."></textarea>
-      <div class="actions"><button class="primary" id="copyJob" type="button">Copy Job Summary</button><a class="action" href="/scheduler.html">Open Scheduler</a></div><div class="status" id="jobStatus"></div>
-    </section>
-  </div>
-
-  <div class="note"><strong>Important:</strong> These owner pages are hidden from search engines, but anyone who knows the exact link could open the page. Gmail, Google Calendar, and GitHub still require your own sign-in before private information can be viewed or changed.</div>
-  <a class="back" href="/">← Back to Website</a>
-</main>
-<script>
-const replyPhone=document.getElementById('replyPhone'),replyMessage=document.getElementById('replyMessage'),replyStatus=document.getElementById('replyStatus');
-document.querySelectorAll('[data-message]').forEach(button=>button.addEventListener('click',()=>replyMessage.value=button.dataset.message));
-document.getElementById('sendReply').addEventListener('click',()=>{const number=replyPhone.value.replace(/[^0-9+]/g,''),message=replyMessage.value.trim();if(!number||number.replace(/\D/g,'').length<10){replyStatus.textContent='Enter a valid customer phone number first.';return}if(!message){replyStatus.textContent='Write or choose a reply first.';return}const isiOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);replyStatus.textContent='Opening your text app...';window.location.href='sms:'+number+(isiOS?'&':'?')+'body='+encodeURIComponent(message)});
-document.getElementById('copyJob').addEventListener('click',async()=>{const customer=document.getElementById('jobCustomer').value.trim()||'Customer',address=document.getElementById('jobAddress').value.trim()||'Address not entered',type=document.getElementById('jobType').value,price=document.getElementById('jobPrice').value.trim()||'Not entered',notes=document.getElementById('jobNotes').value.trim()||'None';const text=["Trent's Lawn Care Job",'Customer: '+customer,'Address: '+address,'Service: '+type,'Price: '+price,'Notes: '+notes].join('\n');try{await navigator.clipboard.writeText(text);document.getElementById('jobStatus').textContent='Job summary copied.'}catch{document.getElementById('jobStatus').textContent='Press and hold the notes to copy them.'}});
-</script>
-</body>
-</html>
+:root{--ink:#071b0f;--forest:#123d22;--lime:#c9ef57;--cream:#f6f2e7;--white:#fff;--muted:#69766d;--line:rgba(7,27,15,.14);--danger:#9f2929}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(rgba(3,16,8,.88),rgba(7,27,15,.75)),url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg') center/cover fixed;padding:18px}
+button,input,select,textarea{font:inherit}.hidden{display:none!important}.shell{width:min(1180px,100%);margin:auto}.panel{background:rgba(246,242,231,.97);border:1px solid rgba(255,255,255,.35);border-radius:28px;box-shadow:0 32px 90px rgba(0,0,0,.42);overflow:hidden}.login{max-width:560px;margin:8vh auto;padding:34px;text-align:center}.login h1{font-size:clamp(2.2
