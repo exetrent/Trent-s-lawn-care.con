@@ -96,3 +96,5 @@ body, body p, body span, body label, body h1, body h2, body h3, body a {
           git add index.html
           git commit -m "Add Louisville background without changing homepage layout"
           git push
+
+# Triggered after the original design was confirmed restored.
