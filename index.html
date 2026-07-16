@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="pr8QmcGOKgpNFF0LYhubZPXIDva9P9X6iw5P4hIhNow" />
 <meta name="theme-color" content="#071b0f">
-<meta name="site-build" content="2026-07-14-business-card-brand-match">
+<meta name="site-build" content="2026-07-15-louisville-background-restored">
 <title>Trent's Lawn Care | Reliable Louisville Lawn Service</title>
 <meta name="description" content="Official Trent's Lawn Care website serving Louisville, Kentucky with mowing and trimming, mulch installation, hedge and shrub pruning, brush removal, and seasonal cleanups.">
 <link rel="canonical" href="https://trentslawncare.com/">
@@ -1138,71 +1138,35 @@ footer{background:#031b10;color:#fff;border-top:6px solid var(--lime)}
   .business-card-showcase{border-width:2px}
 }
 
-/* FULL-DARK-3D-BRAND-2026-07-14 */
-html{background:#02170d}
+/* FULL-LOUISVILLE-BACKGROUND-2026-07-15 */
+html{background:#062d1b}
 body{
   background:
-    radial-gradient(circle at 15% 10%,rgba(183,223,73,.18),transparent 28%),
-    radial-gradient(circle at 85% 44%,rgba(77,170,101,.16),transparent 31%),
-    linear-gradient(145deg,#02170d 0%,#06371f 48%,#031d11 100%)!important;
-  background-attachment:fixed!important;
-  color:#fff;
-  position:relative;
-  isolation:isolate;
+    linear-gradient(180deg,rgba(2,20,11,.46),rgba(2,25,13,.28) 42%,rgba(2,18,10,.52)),
+    var(--downtown-image) center 48% / cover fixed no-repeat!important;
+  color:var(--ink);
 }
 body::before{
-  content:"TRENT’S LAWN CARE\A TRENT’S LAWN CARE\A TRENT’S LAWN CARE\A TRENT’S LAWN CARE\A TRENT’S LAWN CARE\A TRENT’S LAWN CARE\A TRENT’S LAWN CARE\A TRENT’S LAWN CARE";
-  white-space:pre;
+  content:"";
   position:fixed;
+  inset:0;
   z-index:-1;
-  inset:-12vh -15vw;
-  overflow:hidden;
-  transform:rotate(-7deg);
-  font-family:Impact,"Arial Black",system-ui,sans-serif;
-  font-size:clamp(4.5rem,11vw,10rem);
-  line-height:1.32;
-  letter-spacing:.04em;
-  color:rgba(226,255,159,.07);
-  text-shadow:5px 5px 0 rgba(0,0,0,.32),10px 10px 25px rgba(0,0,0,.24);
   pointer-events:none;
+  background:linear-gradient(135deg,rgba(6,45,27,.12),rgba(0,0,0,.08));
 }
-main,.section,.owner-section,.posts-section,.quote-section{background:transparent!important}
-main>.section>.wrap,.owner-section>.wrap,.posts-section>.wrap{
-  background:linear-gradient(145deg,rgba(5,56,31,.9),rgba(2,29,17,.92))!important;
-  border:2px solid rgba(183,223,73,.42);
-  border-radius:34px;
-  padding:clamp(22px,4vw,48px);
-  box-shadow:0 28px 80px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.08);
+body::after{display:none!important}
+main,.section,.owner-section,.posts-section,.quote-section{background:transparent}
+main>.section{
+  background:rgba(247,243,232,.88);
   backdrop-filter:blur(8px);
 }
-.section h2,.section h3,.section-head h2{color:#fffdf4!important;text-shadow:3px 3px 0 rgba(0,0,0,.35),0 0 18px rgba(183,223,73,.12)}
-.section p,.section-head p{color:#e4eee6!important}
-.section .kicker,.section-head .kicker{color:var(--lime)!important}
-.card,.service-card,.embed-card,.social-card,.review{
-  background:linear-gradient(145deg,#fffef8,#eee8d7)!important;
-  color:var(--ink)!important;
-  border:2px solid rgba(183,223,73,.78)!important;
-  box-shadow:9px 10px 0 rgba(0,28,15,.55),0 20px 42px rgba(0,0,0,.24)!important;
-}
-.card h3,.service-card h3,.embed-card h3,.card p,.service-card p,.embed-card p{color:var(--ink)!important;text-shadow:none!important}
-.service-card:hover{transform:translate(-3px,-5px);box-shadow:13px 16px 0 rgba(0,28,15,.5),0 28px 48px rgba(0,0,0,.28)!important}
-.business-card-showcase{
-  background:linear-gradient(145deg,#fffef8,#e9e2cf)!important;
-  box-shadow:12px 14px 0 #032517,0 30px 70px rgba(0,0,0,.38)!important
-}
-.business-card-copy h2,.business-card-copy p{color:var(--ink)!important;text-shadow:none!important}
-.policy-intro,.policy-list details{
-  background:linear-gradient(145deg,#fffef8,#eee8d7)!important;
-  color:var(--ink)!important;
-  border:2px solid rgba(183,223,73,.65)!important;
-  box-shadow:7px 8px 0 rgba(0,28,15,.48)!important
-}
-.policy-intro h3,.policy-intro p,.policy-list summary,.policy-list p{color:var(--ink)!important;text-shadow:none!important}
-.official-proof{box-shadow:0 -7px 0 var(--lime)}
+main>.owner-section,main>.posts-section{background:rgba(234,241,229,.90)}
 @media(max-width:760px){
-  body::before{font-size:4rem;line-height:1.5;inset:-5vh -40vw}
-  main>.section>.wrap,.owner-section>.wrap,.posts-section>.wrap{border-radius:22px;padding:20px}
-  .card,.service-card,.embed-card{box-shadow:6px 7px 0 rgba(0,28,15,.55),0 16px 30px rgba(0,0,0,.22)!important}
+  body{
+    background:
+      linear-gradient(180deg,rgba(2,20,11,.48),rgba(2,25,13,.30) 42%,rgba(2,18,10,.54)),
+      var(--downtown-image) center 48% / cover scroll no-repeat!important;
+  }
 }
 
 /* CONTRAST-FIX-2026-07-14 */
