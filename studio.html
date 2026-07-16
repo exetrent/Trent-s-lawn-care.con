@@ -1,1 +1,164 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Trent Studio</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#061a0e;color:white}.hidden{display:none}.bg{position:fixed;inset:0;background:linear-gradient(#061a0ed9,#174e2be8),url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg') center/cover}.words{position:absolute;inset:-20%;transform:rotate(-12deg);font-size:6vw;font-weight:900;line-height:2;color:#c9ef5722;white-space:nowrap}.layer{position:relative}.login{min-height:100vh;display:grid;place-items:center;padding:20px}.card{width:min(900px,100%);padding:25px;border-radius:25px;background:#f6f2e7;color:#061a0e;box-shadow:0 20px 70px #0008}.login .card{max-width:520px;text-align:center}h1{font-size:clamp(2.4rem,8vw,5rem);line-height:.9;text-transform:uppercase}.btn{border:0;border-radius:999px;padding:12px 16px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;background:#c9ef57;color:#061a0e;margin:4px}.dark{background:#061a0e;color:white}.top{padding:14px 18px;background:#061a0eef;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.wrap{width:min(1100px,100%);margin:auto;padding:20px}.grid{display:grid;grid-template-columns:1.4fr .6fr;gap:16px}.viewer{background:#000;border-radius:22px;overflow:hidden;aspect-ratio:16/10}.viewer video{width:100%;height:100%;object-fit:cover}.mirror video{transform:scaleX(-1)}.panel{background:#f6f2e7;color:#061a0e;border-radius:22px;padding:18px}textarea{width:100%;min-height:180px;padding:12px;border-radius:12px}.status{margin-top:10px}@media(max-width:800px){.grid{grid-template-columns:1fr}}</style></head><body><div class="bg"><div class="words">TRENT STUDIO • TRENT'S LAWN CARE • (502) 835-8658<br>CREATE • FILM • BUILD • LOUISVILLE<br>TRENT STUDIO • OWNER MODE • CAMERA</div></div><section id="login" class="login layer"><div class="card"><h1>Trent Studio</h1><p>Sign in with the approved business Google account.</p><button id="signIn" class="btn">Sign in with Google</button><div id="loginStatus"></div><a class="btn dark" href="/admin.html">Dashboard</a></div></section><div id="studio" class="hidden layer"><header class="top"><strong>Trent Studio</strong><div><a class="btn" href="/admin.html">Dashboard</a><button id="signOut" class="btn dark">Sign out</button></div></header><main class="wrap"><h1>Camera Playground</h1><p>Your camera preview stays on your device.</p><div class="grid"><section class="card"><div id="viewer" class="viewer mirror"><video id="video" autoplay playsinline muted></video></div><div><button id="start" class="btn">Start camera</button><button id="mirror" class="btn">Mirror</button><button id="switch" class="btn">Switch camera</button><button id="stop" class="btn dark">Stop</button></div><div id="cameraStatus" class="status">Camera is off.</div></section><aside class="panel"><h2>Creator notes</h2><textarea id="notes" placeholder="Video ideas, camera shots, captions..."></textarea><button id="saveNotes" class="btn">Save notes</button><div id="noteStatus"></div></aside></div></main></div><script type="module">import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';import{getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';const cfg={apiKey:'AIzaSyCdTFyZoBAKfO0L5ZAZ-IP4cqltnlEs1l4',authDomain:'trentlawn-care.firebaseapp.com',projectId:'trentlawn-care',appId:'1:440907459371:web:2a4a9a8bf1594d2f14336e'};const owner='trents.lawncare.ky@gmail.com',app=initializeApp(cfg),auth=getAuth(app),provider=new GoogleAuthProvider(),$=x=>document.getElementById(x);let stream=null,facing='user';$('signIn').onclick=async()=>{try{await signInWithPopup(auth,provider)}catch(e){$('loginStatus').textContent=e.message}};$('signOut').onclick=()=>signOut(auth);onAuthStateChanged(auth,async u=>{if(!u){$('login').classList.remove('hidden');$('studio').classList.add('hidden');return}if((u.email||'').toLowerCase()!==owner){await signOut(auth);$('loginStatus').textContent='Access denied.';return}$('login').classList.add('hidden');$('studio').classList.remove('hidden')});async function start(){try{stop();stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing},audio:false});$('video').srcObject=stream;$('cameraStatus').textContent='Camera is live.'}catch(e){$('cameraStatus').textContent=e.message}}function stop(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('video').srcObject=null;$('cameraStatus').textContent='Camera is off.'}$('start').onclick=start;$('stop').onclick=stop;$('mirror').onclick=()=>$('viewer').classList.toggle('mirror');$('switch').onclick=async()=>{facing=facing==='user'?'environment':'user';await start()};$('notes').value=localStorage.getItem('trentNotes')||'';$('saveNotes').onclick=()=>{localStorage.setItem('trentNotes',$('notes').value);$('noteStatus').textContent='Saved on this device.'};</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Private Trent Studio</title>
+<style>
+:root{--ink:#061a0e;--forest:#174e2b;--lime:#c9ef57;--cream:#f6f2e7;--white:#fff;--muted:#68736b;--line:#d8dfd4;--danger:#a52d2d}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif}
+body{background:var(--ink);color:white}
+.hidden{display:none!important}
+.bg{position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(3,16,8,.86),rgba(12,46,25,.86)),url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg') center/cover}
+.bg::after{content:"TRENT STUDIO   •   TRENT'S LAWN CARE   •   (502) 835-8658   •   CREATE   •   FILM   •   BUILD";position:absolute;inset:-15%;display:flex;align-items:center;font-size:clamp(2.5rem,7vw,7rem);font-weight:1000;line-height:2.1;color:rgba(201,239,87,.08);transform:rotate(-11deg);white-space:pre-wrap;overflow:hidden}
+.login{min-height:100vh;display:grid;place-items:center;padding:22px}
+.login-card,.panel{background:rgba(246,242,231,.97);color:var(--ink);border:1px solid rgba(255,255,255,.5);box-shadow:0 24px 80px rgba(0,0,0,.42)}
+.login-card{width:min(520px,100%);padding:34px;border-radius:30px;text-align:center}
+.login-card h1,.hero-title{font-size:clamp(2.6rem,8vw,5.5rem);line-height:.9;text-transform:uppercase;letter-spacing:-.06em;margin:14px 0}
+.btn{border:0;border-radius:999px;padding:12px 17px;font-weight:950;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:4px;background:var(--lime);color:var(--ink)}
+.btn.dark{background:var(--ink);color:white}.btn.danger{background:var(--danger);color:white}.btn.light{background:#e7eee2;color:var(--forest)}
+.status{min-height:22px;margin-top:10px;font-size:.9rem;color:var(--forest)}
+.topbar{position:sticky;top:0;z-index:20;padding:14px 18px;background:rgba(6,26,14,.93);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.12)}
+.topbar strong{color:var(--lime);font-size:1.1rem}.topbar small{display:block;opacity:.75;margin-top:3px}
+.wrap{width:min(1180px,100%);margin:auto;padding:24px}
+.intro{margin-bottom:18px}.intro p{max-width:700px;color:rgba(255,255,255,.76)}
+.grid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
+.panel{border-radius:26px;padding:18px}
+.viewer{background:#000;border-radius:22px;overflow:hidden;aspect-ratio:16/10;display:grid;place-items:center;position:relative}
+.viewer video{width:100%;height:100%;object-fit:cover}.viewer.mirror video{transform:scaleX(-1)}
+.camera-label{position:absolute;left:14px;top:14px;background:rgba(0,0,0,.6);color:white;padding:8px 10px;border-radius:999px;font-size:.75rem;font-weight:900}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.controls .btn{margin:0}
+textarea,input{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit;background:white;color:var(--ink)}
+textarea{min-height:165px;resize:vertical}
+.tools{display:grid;gap:16px}
+.idea-list{display:grid;gap:8px;margin-top:12px}.idea{padding:11px 12px;border-radius:13px;background:#eaf0e5;font-size:.9rem}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick-card{padding:12px;border-radius:15px;background:#eef3e9;border:1px solid var(--line);font-size:.86rem;font-weight:800;cursor:pointer}
+.quick-card:hover{transform:translateY(-1px)}
+.footer{padding:25px;text-align:center;color:rgba(255,255,255,.65);font-size:.82rem}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.wrap{padding:14px}.hero-title{font-size:3rem}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<section id="login" class="login">
+  <div class="login-card">
+    <div>PRIVATE OWNER ACCESS</div>
+    <h1>Trent Studio</h1>
+    <p>Use the approved Trent's Lawn Care business Google account.</p>
+    <button id="signIn" class="btn">Sign in with Google</button>
+    <div id="loginStatus" class="status"></div>
+    <a class="btn dark" href="/admin.html">Owner Dashboard</a>
+  </div>
+</section>
+
+<div id="studio" class="hidden">
+  <header class="topbar">
+    <div><strong>Trent Studio</strong><small id="ownerEmail"></small></div>
+    <div>
+      <a class="btn light" href="/admin.html">Dashboard</a>
+      <a class="btn light" href="/">Main Website</a>
+      <button id="signOut" class="btn danger">Sign out</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <h1 class="hero-title">Creator Studio</h1>
+      <p>Use your camera, plan videos, save captions, and keep your creator ideas in one private place.</p>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>Camera Preview</h2>
+        <p>Your camera stays on your device. Nothing uploads automatically.</p>
+        <div id="viewer" class="viewer mirror">
+          <span class="camera-label">PRIVATE PREVIEW</span>
+          <video id="video" autoplay playsinline muted></video>
+        </div>
+        <div class="controls">
+          <button id="start" class="btn">Start camera</button>
+          <button id="switch" class="btn light">Switch camera</button>
+          <button id="mirror" class="btn light">Mirror</button>
+          <button id="stop" class="btn dark">Stop</button>
+        </div>
+        <div id="cameraStatus" class="status">Camera is off.</div>
+      </section>
+
+      <aside class="tools">
+        <section class="panel">
+          <h2>Creator Notes</h2>
+          <textarea id="notes" placeholder="Video ideas, camera shots, Bible content, lawn care videos, captions..."></textarea>
+          <button id="saveNotes" class="btn">Save notes</button>
+          <div id="noteStatus" class="status"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Quick Ideas</h2>
+          <div class="quick-grid">
+            <button class="quick-card" data-idea="Before and after lawn transformation">Before & after</button>
+            <button class="quick-card" data-idea="A day running Trent's Lawn Care">Day in my life</button>
+            <button class="quick-card" data-idea="Fast mowing and edging montage">Mowing montage</button>
+            <button class="quick-card" data-idea="Short business motivation video">Motivation</button>
+            <button class="quick-card" data-idea="Bible verse with a calm Louisville background">Bible short</button>
+            <button class="quick-card" data-idea="Explain one lawn care tip in 20 seconds">Quick tip</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Saved Ideas</h2>
+          <input id="newIdea" placeholder="Type a new video idea">
+          <button id="addIdea" class="btn">Add idea</button>
+          <div id="ideaList" class="idea-list"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <footer class="footer">Private Trent Studio • Approved business account only</footer>
+</div>
+
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
+import{getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
+const config={apiKey:'AIzaSyCdTFyZoBAKfO0L5ZAZ-IP4cqltnlEs1l4',authDomain:'trentlawn-care.firebaseapp.com',projectId:'trentlawn-care',storageBucket:'trentlawn-care.firebasestorage.app',messagingSenderId:'440907459371',appId:'1:440907459371:web:2a4a9a8bf1594d2f14336e'};
+const OWNER='trents.lawncare.ky@gmail.com';
+const app=initializeApp(config),auth=getAuth(app),provider=new GoogleAuthProvider();
+provider.setCustomParameters({prompt:'select_account'});
+const $=id=>document.getElementById(id);
+let stream=null,facing='user';
+$('signIn').onclick=async()=>{try{$('loginStatus').textContent='Opening Google sign-in...';await signInWithPopup(auth,provider)}catch(e){$('loginStatus').textContent=e.message}};
+$('signOut').onclick=()=>signOut(auth);
+onAuthStateChanged(auth,async user=>{
+  if(!user){$('login').classList.remove('hidden');$('studio').classList.add('hidden');return}
+  if((user.email||'').toLowerCase()!==OWNER){await signOut(auth);$('loginStatus').textContent='Access denied. Use '+OWNER;return}
+  $('ownerEmail').textContent=user.email;
+  $('login').classList.add('hidden');
+  $('studio').classList.remove('hidden');
+});
+async function startCamera(){
+  try{
+    stopCamera();
+    if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera access is not supported in this browser.');
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing},audio:false});
+    $('video').srcObject=stream;
+    $('cameraStatus').textContent='Camera is live.';
+  }catch(e){$('cameraStatus').textContent='Camera error: '+e.message}
+}
+function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('video').srcObject=null;$('cameraStatus').textContent='Camera is off.'}
+$('start').onclick=startCamera;$('stop').onclick=stopCamera;
+$('switch').onclick=async()=>{facing=facing==='user'?'environment':'user';await startCamera()};
+$('mirror').onclick=()=>$('viewer').classList.toggle('mirror');
+const notesKey='trentStudioNotesV2',ideasKey='trentStudioIdeasV2';
+$('notes').value=localStorage.getItem(notesKey)||'';
+$('saveNotes').onclick=()=>{localStorage.setItem(notesKey,$('notes').value);$('noteStatus').textContent='Notes saved on this device.'};
+let ideas=JSON.parse(localStorage.getItem(ideasKey)||'[]');
+function saveIdeas(){localStorage.setItem(ideasKey,JSON.stringify(ideas));renderIdeas()}
+function renderIdeas(){$('ideaList').innerHTML=ideas.length?'':'<div class="idea">No saved ideas yet.</div>';ideas.forEach((idea,i)=>{const el=document.createElement('div');el.className='idea';el.textContent=idea;el.title='Click to remove';el.onclick=()=>{if(confirm('Remove this idea?')){ideas.splice(i,1);saveIdeas()}};$('ideaList').appendChild(el)})}
+$('addIdea').onclick=()=>{const value=$('newIdea').value.trim();if(!value)return;ideas.unshift(value);$('newIdea').value='';saveIdeas()};
+document.querySelectorAll('[data-idea]').forEach(btn=>btn.onclick=()=>{ideas.unshift(btn.dataset.idea);saveIdeas()});
+renderIdeas();
+window.addEventListener('beforeunload',stopCamera);
+</script>
+</body>
+</html>
