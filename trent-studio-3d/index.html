@@ -5,14 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Trent Studio 3D</title>
-<link rel="stylesheet" href="/theater3d.css?v=2">
+<link rel="stylesheet" href="/theater3d.css?v=3">
 <style>
-.faith-neon{position:absolute;top:15%;left:50%;transform:translateX(-50%);font-weight:1000;font-size:clamp(18px,2.3vw,34px);color:#fff;text-shadow:0 0 8px #fff,0 0 18px #ffd85c,0 0 38px #ffd85c;letter-spacing:.12em}
-.lounge-tag{position:absolute;left:50%;top:20%;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#000a;border:1px solid #ff7a1833;color:#ffb36f;font-weight:900;letter-spacing:.08em}
-.site-link{pointer-events:auto;text-decoration:none;color:#061009;background:#c9ef57;padding:9px 13px;border-radius:12px;font-weight:1000}
-@media(max-width:900px){.faith-neon{top:16%}.lounge-tag{top:21%}}
+.faith-neon{position:absolute;top:11%;left:50%;transform:translateX(-50%);font-weight:1000;font-size:clamp(16px,2vw,30px);color:#fff;text-shadow:0 0 8px #fff,0 0 18px #ffd85c,0 0 38px #ffd85c;letter-spacing:.12em;white-space:nowrap}.lounge-tag{position:absolute;left:50%;top:16%;transform:translateX(-50%);padding:7px 13px;border-radius:999px;background:#000a;border:1px solid #ff7a1855;color:#ffb36f;font-weight:900;letter-spacing:.08em;white-space:nowrap}.site-link{pointer-events:auto;text-decoration:none;color:#061009;background:#c9ef57;padding:9px 13px;border-radius:12px;font-weight:1000}.screen-wrap{top:43%;width:min(55vw,900px);box-shadow:0 0 55px #8dffae55,0 30px 90px #000}.camera-wall{top:23%;bottom:24%;width:min(17vw,235px)}.controls{bottom:14px}.status{bottom:78px}.help{top:68px;background:#07110dd9}.neon-title{top:4.5%;font-size:clamp(24px,3.6vw,52px)}@media(max-width:900px){.faith-neon{top:13%;font-size:15px}.lounge-tag{top:17.5%;font-size:10px}.screen-wrap{top:39%;width:94vw}.camera-wall{top:auto;bottom:104px;height:116px}.neon-title{top:7%}.status{bottom:170px}}
 </style>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/"}}</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js"}}</script>
 </head>
 <body>
 <div id="scene"></div>
@@ -32,7 +29,7 @@
   </div>
   <section class="camera-wall left" id="leftCams"></section>
   <section class="camera-wall right" id="rightCams"></section>
-  <div class="panel help">Drag to look around. Scroll or pinch to zoom. Paste a YouTube link below. Side screens refresh with public Kentucky camera snapshots.</div>
+  <div class="panel help">You are already seated inside the lounge. Move your mouse slightly to look around. No zooming is needed. Louisville is visible through the side windows.</div>
   <div class="status" id="status">Loading the football theater and camera wall…</div>
   <div class="panel controls">
     <input id="videoUrl" placeholder="Paste a YouTube video, Shorts, live, or playlist link">
@@ -41,6 +38,6 @@
     <button id="lights" class="alt">Dim lights</button>
   </div>
 </div>
-<script type="module" src="/theater3d.js?v=2"></script>
+<script type="module" src="/theater3d.js?v=3"></script>
 </body>
 </html>
