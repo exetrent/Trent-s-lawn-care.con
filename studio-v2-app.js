@@ -1,3 +1,0 @@
-const app=document.getElementById('app');
-const files=['studio-room-login.html','studio-room-home.html','studio-room-theater.html','studio-room-cameras.html','studio-room-football.html','studio-room-office.html','studio-room-creator.html','studio-room-footer.html'];
-Promise.all(files.map(name=>fetch('/'+name).then(r=>{if(!r.ok)throw new Error(name+' failed to load');return r.text()}))).then(async parts=>{app.innerHTML=parts.join('');await import('/studio-v2-auth.js');await import('/studio-v2-tools.js')}).catch(err=>{app.innerHTML='<main style="padding:30px;color:white;font-family:Arial">'+err.message+'</main>'});
