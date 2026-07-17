@@ -66,10 +66,17 @@ textarea{min-height:165px;resize:vertical}
 .camera-links{display:grid;gap:8px;margin-top:10px}
 .camera-link{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:13px;background:#eef4e9;color:var(--ink);font-size:.82rem;font-weight:850;text-decoration:none}
 .camera-link small{color:var(--muted);font-weight:700}
-.football-lounge{margin-top:18px;background:linear-gradient(145deg,#071b0f,#174e2b);color:#fff;border-radius:22px;padding:20px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
-.football-lounge h2{margin:0 0 6px;color:var(--lime)}.football-lounge p{color:rgba(255,255,255,.76);margin-bottom:14px}
-.football-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.football-card{padding:12px;border:1px solid rgba(201,239,87,.3);border-radius:14px;background:rgba(255,255,255,.08);font-size:.8rem;font-weight:850}
+.football-lounge{grid-column:1/-1;margin-top:18px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% -20%,rgba(201,239,87,.22),transparent 38%),linear-gradient(145deg,#020904,#0c321b 55%,#07170d);color:#fff;border-radius:28px;padding:24px;box-shadow:0 24px 65px rgba(0,0,0,.42),inset 0 0 0 1px rgba(201,239,87,.28)}
+.football-lounge::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 9.5%,rgba(255,255,255,.025) 10%);pointer-events:none}
+.football-lounge h2{position:relative;margin:0 0 6px;color:var(--lime);font-size:clamp(1.8rem,4vw,3.2rem);text-transform:uppercase;letter-spacing:-.04em}.football-lounge p{position:relative;color:rgba(255,255,255,.76);margin-bottom:14px}
+.lounge-room{position:relative;margin-top:18px;padding:20px;border-radius:24px;background:linear-gradient(180deg,#07120b 0 64%,#173f25 64% 67%,#07100a 67%);border:1px solid rgba(201,239,87,.25);box-shadow:inset 0 18px 55px rgba(0,0,0,.72);perspective:800px}
+.lounge-screen{width:min(760px,92%);margin:auto;border:7px solid #18231b;border-bottom-width:12px;border-radius:12px;background:#000;box-shadow:0 0 35px rgba(201,239,87,.3);aspect-ratio:16/7;display:grid;place-items:center;text-align:center;padding:20px;background-image:linear-gradient(rgba(1,18,7,.42),rgba(1,18,7,.68)),url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1400&q=82');background-size:cover;background-position:center}
+.lounge-screen strong{font-size:clamp(1.3rem,4vw,3.1rem);color:#fff;text-shadow:0 3px 15px #000}.lounge-screen span{display:block;margin-top:5px;color:var(--lime);font-weight:950;letter-spacing:.12em}
+.score-strip{display:flex;justify-content:center;gap:18px;margin:10px auto 0;color:var(--lime);font-size:.72rem;font-weight:1000;letter-spacing:.1em}
+.seat-rows{margin:18px auto 0;display:grid;gap:9px;max-width:780px;transform:rotateX(7deg)}
+.seat-row{display:flex;justify-content:center;gap:8px}.seat-row:nth-child(2){gap:10px}.seat{width:54px;height:31px;border-radius:9px 9px 15px 15px;background:linear-gradient(#315e3e,#102818);border:1px solid rgba(201,239,87,.34);box-shadow:0 7px 0 #050a06,0 11px 14px rgba(0,0,0,.45)}.seat.vip{background:linear-gradient(#d2f169,#537620)}
+.football-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.football-card{padding:15px;border:1px solid rgba(201,239,87,.3);border-radius:14px;background:rgba(255,255,255,.08);font-size:.82rem;font-weight:850;backdrop-filter:blur(8px)}
 @media(max-width:600px){.scene-grid,.football-grid{grid-template-columns:1fr}.movie-controls{grid-template-columns:1fr}.theater-heading{display:block}.now-playing{display:inline-flex;margin-top:8px}}
 
 </style>
@@ -159,12 +166,24 @@ textarea{min-height:165px;resize:vertical}
       </section>
 
       <section class="football-lounge">
-        <h2>Football Lounge</h2>
-        <p>A chill place for Trent’s football notes, film ideas, and game-day planning.</p>
+        <span class="studio-kicker" style="color:#c9ef57">PRIVATE PLAYER ROOM</span>
+        <h2>Trent’s Football Theater</h2>
+        <p>A realistic mini team lounge for watching film, football videos, and Trent’s creator content.</p>
+        <div class="lounge-room" aria-label="Mini football movie theater">
+          <div class="lounge-screen">
+            <div><strong>GAME FILM • CREATOR STUDIO</strong><span>LOUISVILLE, KENTUCKY</span></div>
+          </div>
+          <div class="score-strip"><span>TRENT STUDIO</span><span>•</span><span>PLAYER LOUNGE</span></div>
+          <div class="seat-rows" aria-label="Theater seating">
+            <div class="seat-row"><i class="seat vip"></i><i class="seat vip"></i><i class="seat vip"></i><i class="seat vip"></i><i class="seat vip"></i></div>
+            <div class="seat-row"><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i></div>
+            <div class="seat-row"><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat"></i></div>
+          </div>
+        </div>
         <div class="football-grid">
-          <div class="football-card">🏈 Route study</div>
-          <div class="football-card">🎥 Film review</div>
-          <div class="football-card">💪 Practice plan</div>
+          <div class="football-card">🏈 Player Film Room<br><small>Study routes and game footage</small></div>
+          <div class="football-card">🎬 Big-Screen Theater<br><small>Use the movie screen above</small></div>
+          <div class="football-card">📋 Game-Day Board<br><small>Keep plans in Creator Notes</small></div>
         </div>
       </section>
 
