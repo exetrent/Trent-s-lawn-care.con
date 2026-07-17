@@ -1,0 +1,67 @@
+name: Deploy Trent's Lawn Care Website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Verify Studio files
+        run: |
+          set -eu
+          test -f index.html
+          test -f CNAME
+          test -f .nojekyll
+          test -f studio-v2.html
+          test -f studio-hq.css
+          test -f studio-v2.js
+          test -f studio-v2-auth.js
+          test -f studio-v2-tools.js
+          test -f studio-v2-storage.js
+          node --check studio-v2.js
+          node --check studio-v2-auth.js
+          node --check studio-v2-tools.js
+          node --check studio-v2-storage.js
+
+      - name: Prepare static site
+        run: |
+          mkdir -p _site
+          rsync -a --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '_site' \
+            ./ _site/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
