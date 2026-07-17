@@ -1,0 +1,2 @@
+const app=document.getElementById('app');
+fetch('/studio-v2-layout.html').then(r=>{if(!r.ok)throw new Error('Studio layout failed to load.');return r.text()}).then(async html=>{app.innerHTML=html;await import('/studio-v2-auth.js');await import('/studio-v2-tools.js')}).catch(err=>{app.innerHTML='<main style="padding:30px;color:white;font-family:Arial">'+err.message+'</main>'});
