@@ -1,0 +1,88 @@
+name: Studio V2 health check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'studio-v2.html'
+      - 'studio-v2.js'
+      - 'studio-v2-auth.js'
+      - 'studio-v2-tools.js'
+      - 'studio-v2-storage.js'
+      - 'studio-hq.css'
+      - '.github/workflows/studio-health-check.yml'
+  pull_request:
+    paths:
+      - 'studio-v2.html'
+      - 'studio-v2.js'
+      - 'studio-v2-auth.js'
+      - 'studio-v2-tools.js'
+      - 'studio-v2-storage.js'
+      - 'studio-hq.css'
+      - '.github/workflows/studio-health-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-studio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Verify required Studio files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          required = [
+              'studio-v2.html',
+              'studio-v2.js',
+              'studio-v2-auth.js',
+              'studio-v2-tools.js',
+              'studio-v2-storage.js',
+              'studio-hq.css',
+              'CNAME',
+              '.nojekyll',
+          ]
+          missing = [name for name in required if not Path(name).exists()]
+          if missing:
+              raise SystemExit('Missing required files: ' + ', '.join(missing))
+
+          html = Path('studio-v2.html').read_text(encoding='utf-8')
+          required_html = [
+              'id="signIn"',
+              'id="studio"',
+              'id="movieScreen"',
+              'id="video"',
+              'src="/studio-v2.js"',
+              'href="/studio-hq.css"',
+          ]
+          missing_html = [item for item in required_html if item not in html]
+          if missing_html:
+              raise SystemExit('Studio HTML is missing: ' + ', '.join(missing_html))
+
+          loader = Path('studio-v2.js').read_text(encoding='utf-8')
+          for module in ('studio-v2-auth.js', 'studio-v2-tools.js'):
+              if module not in loader:
+                  raise SystemExit(f'Studio loader does not load {module}')
+
+          tools = Path('studio-v2-tools.js').read_text(encoding='utf-8')
+          if 'studio-v2-storage.js' not in tools:
+              raise SystemExit('Studio tools do not load storage controls')
+
+          cname = Path('CNAME').read_text(encoding='utf-8').strip()
+          if cname != 'trentslawncare.com':
+              raise SystemExit('CNAME must be trentslawncare.com')
+
+          print('Studio V2 file structure looks good.')
+          PY
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check studio-v2.js
+          node --check studio-v2-auth.js
+          node --check studio-v2-tools.js
+          node --check studio-v2-storage.js
