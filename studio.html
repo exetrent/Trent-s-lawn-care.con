@@ -38,6 +38,40 @@ textarea{min-height:165px;resize:vertical}
 .quick-card:hover{transform:translateY(-1px)}
 .footer{padding:25px;text-align:center;color:rgba(255,255,255,.65);font-size:.82rem}
 @media(max-width:850px){.grid{grid-template-columns:1fr}.wrap{padding:14px}.hero-title{font-size:3rem}}
+
+/* MOVIE THEATER + LOUNGE */
+.theater-panel{background:linear-gradient(145deg,#f8f4e8,#e8f0e4)!important}
+.theater-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.theater-heading h2{margin:5px 0 4px}
+.studio-kicker{font-size:.72rem;font-weight:1000;letter-spacing:.14em;text-transform:uppercase;color:var(--forest)}
+.now-playing{padding:7px 10px;border-radius:999px;background:var(--ink);color:var(--lime);font-size:.7rem;font-weight:1000;letter-spacing:.08em;white-space:nowrap}
+.theater-shell{margin-top:14px;padding:12px;border-radius:24px;background:#07140c;box-shadow:inset 0 0 0 1px rgba(201,239,87,.3),0 18px 45px rgba(0,0,0,.28)}
+.screen-frame{position:relative;overflow:hidden;border-radius:16px;background:#000;aspect-ratio:16/9;box-shadow:0 0 28px rgba(201,239,87,.18)}
+.screen-frame::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border:1px solid rgba(255,255,255,.22);border-radius:16px}
+.screen-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.theater-seatbar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#f4ffe5;font-size:.78rem;font-weight:900;padding:10px 3px 0}
+.theater-seatbar .btn{font-size:.75rem;padding:9px 12px}
+.movie-controls{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:11px}
+.movie-controls .btn{margin:0}
+.movie-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.movie-presets .btn{margin:0;background:#dff2bd;font-size:.75rem;padding:9px 12px}
+.scene-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}
+.scene-card{min-height:92px;position:relative;overflow:hidden;border:0;border-radius:16px;padding:12px;text-align:left;color:#fff;background-size:cover;background-position:center;cursor:pointer;box-shadow:0 9px 22px rgba(0,0,0,.2)}
+.scene-card::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(3,18,9,.22),rgba(3,18,9,.84))}
+.scene-card strong,.scene-card span{position:relative;z-index:1;display:block}
+.scene-card strong{font-size:.85rem}.scene-card span{font-size:.7rem;opacity:.85;margin-top:4px}
+.scene-card.louisville{background-image:url('https://www.goodfreephotos.com/albums/united-states/kentucky/louisville/skyline-of-downtown-louisville-kentucky.jpg')}
+.scene-card.paris{background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80')}
+.scene-card.map{background-image:linear-gradient(135deg,#17522e,#0b2b1a)}
+.camera-links{display:grid;gap:8px;margin-top:10px}
+.camera-link{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:13px;background:#eef4e9;color:var(--ink);font-size:.82rem;font-weight:850;text-decoration:none}
+.camera-link small{color:var(--muted);font-weight:700}
+.football-lounge{margin-top:18px;background:linear-gradient(145deg,#071b0f,#174e2b);color:#fff;border-radius:22px;padding:20px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
+.football-lounge h2{margin:0 0 6px;color:var(--lime)}.football-lounge p{color:rgba(255,255,255,.76);margin-bottom:14px}
+.football-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.football-card{padding:12px;border:1px solid rgba(201,239,87,.3);border-radius:14px;background:rgba(255,255,255,.08);font-size:.8rem;font-weight:850}
+@media(max-width:600px){.scene-grid,.football-grid{grid-template-columns:1fr}.movie-controls{grid-template-columns:1fr}.theater-heading{display:block}.now-playing{display:inline-flex;margin-top:8px}}
+
 </style>
 </head>
 <body>
@@ -86,6 +120,57 @@ textarea{min-height:165px;resize:vertical}
         <div id="cameraStatus" class="status">Camera is off.</div>
       </section>
 
+      <section class="panel theater-panel">
+        <div class="theater-heading">
+          <div><span class="studio-kicker">STUDIO SCREEN</span><h2>Movie Theater</h2><p>Load a YouTube video or playlist and watch it on the theater screen.</p></div>
+          <span id="screenStatus" class="now-playing">READY</span>
+        </div>
+        <div class="theater-shell">
+          <div class="screen-frame">
+            <iframe id="movieScreen" title="Trent Studio movie theater screen" src="https://www.youtube-nocookie.com/embed/videoseries?list=UUuOdZlCQYYKvXiLcF8bC-Jg&amp;rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="theater-seatbar"><span>🎟️ Trent Studio Theater</span><button id="fullscreenScreen" class="btn light">Fullscreen</button></div>
+        </div>
+        <div class="movie-controls">
+          <input id="videoUrl" placeholder="Paste a YouTube video or playlist link">
+          <button id="loadVideo" class="btn">Load video</button>
+        </div>
+        <div class="movie-presets">
+          <button class="btn" data-video="https://www.youtube.com/playlist?list=UUuOdZlCQYYKvXiLcF8bC-Jg">Trent uploads</button>
+          <button class="btn" data-video="https://www.youtube.com/watch?v=OzYp4NRZlwQ">Paris live cam</button>
+          <a class="btn" href="https://www.youtube.com/results?search_query=Louisville+Kentucky+live+camera" target="_blank" rel="noopener">Louisville camera search ↗</a>
+        </div>
+        <div class="status">YouTube controls and fullscreen are provided by YouTube.</div>
+      </section>
+
+      <section class="panel">
+        <h2>Paris + Louisville Views</h2>
+        <p>Switch the studio mood or open live camera sources in a new tab.</p>
+        <div class="scene-grid">
+          <button class="scene-card louisville" data-scene="Louisville"><strong>Louisville, Kentucky</strong><span>Downtown view</span></button>
+          <button class="scene-card paris" data-scene="Paris"><strong>Paris, France</strong><span>Eiffel Tower mood</span></button>
+          <button class="scene-card map" data-scene="Louisville map"><strong>Louisville map</strong><span>Service-area view ↗</span></button>
+        </div>
+        <div class="camera-links">
+          <a class="camera-link" href="https://www.511.ky.gov/" target="_blank" rel="noopener"><span>Kentucky 511 cameras <small>official traffic cameras</small></span><span>↗</span></a>
+          <a class="camera-link" href="https://www.skylinewebcams.com/en/webcam/france/ile-de-france/paris/tour-eiffel.html" target="_blank" rel="noopener"><span>Paris Eiffel Tower cam <small>live webcam source</small></span><span>↗</span></a>
+          <a class="camera-link" href="https://www.google.com/maps/@38.1886093,-85.8408091,11z" target="_blank" rel="noopener"><span>Louisville Google Map <small>service area</small></span><span>↗</span></a>
+        </div>
+      </section>
+
+      <section class="football-lounge">
+        <h2>Football Lounge</h2>
+        <p>A chill place for Trent’s football notes, film ideas, and game-day planning.</p>
+        <div class="football-grid">
+          <div class="football-card">🏈 Route study</div>
+          <div class="football-card">🎥 Film review</div>
+          <div class="football-card">💪 Practice plan</div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="grid">
       <aside class="tools">
         <section class="panel">
           <h2>Creator Notes</h2>
@@ -122,7 +207,7 @@ textarea{min-height:165px;resize:vertical}
 import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
 import{getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
 const config={apiKey:'AIzaSyCdTFyZoBAKfO0L5ZAZ-IP4cqltnlEs1l4',authDomain:'trentlawn-care.firebaseapp.com',projectId:'trentlawn-care',storageBucket:'trentlawn-care.firebasestorage.app',messagingSenderId:'440907459371',appId:'1:440907459371:web:2a4a9a8bf1594d2f14336e'};
-const OWNER='trents.lawncare.ky@gmail.com';
+const OWNER_EMAILS=['trents.lawncare.ky@gmail.com','trenton77@gmail.com'];
 const app=initializeApp(config),auth=getAuth(app),provider=new GoogleAuthProvider();
 provider.setCustomParameters({prompt:'select_account'});
 const $=id=>document.getElementById(id);
@@ -131,7 +216,7 @@ $('signIn').onclick=async()=>{try{$('loginStatus').textContent='Opening Google s
 $('signOut').onclick=()=>signOut(auth);
 onAuthStateChanged(auth,async user=>{
   if(!user){$('login').classList.remove('hidden');$('studio').classList.add('hidden');return}
-  if((user.email||'').toLowerCase()!==OWNER){await signOut(auth);$('loginStatus').textContent='Access denied. Use '+OWNER;return}
+  if(!OWNER_EMAILS.includes((user.email||'').toLowerCase())){await signOut(auth);$('loginStatus').textContent='Access denied. Use an approved Trent Studio account.';return}
   $('ownerEmail').textContent=user.email;
   $('login').classList.add('hidden');
   $('studio').classList.remove('hidden');
@@ -149,6 +234,27 @@ function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=n
 $('start').onclick=startCamera;$('stop').onclick=stopCamera;
 $('switch').onclick=async()=>{facing=facing==='user'?'environment':'user';await startCamera()};
 $('mirror').onclick=()=>$('viewer').classList.toggle('mirror');
+
+const screen=$('movieScreen'), videoUrl=$('videoUrl'), screenStatus=$('screenStatus');
+function youtubeEmbed(raw){
+  const value=(raw||'').trim();
+  if(!value)return null;
+  const list=value.match(/[?&]list=([A-Za-z0-9_-]+)/);
+  if(list)return 'https://www.youtube-nocookie.com/embed/videoseries?list='+list[1]+'&rel=0';
+  const id=value.match(/(?:youtu\\.be\\/|youtube\\.com\\/(?:watch\\?v=|embed\\/|shorts\\/|live\\/))([A-Za-z0-9_-]{6,})/);
+  if(id)return 'https://www.youtube-nocookie.com/embed/'+id[1]+'?rel=0';
+  return null;
+}
+function loadMovie(raw){
+  const embed=youtubeEmbed(raw);
+  if(!embed){screenStatus.textContent='PASTE A YOUTUBE LINK';return}
+  screen.src=embed;screenStatus.textContent='NOW PLAYING';
+}
+$('loadVideo').onclick=()=>loadMovie(videoUrl.value);
+document.querySelectorAll('[data-video]').forEach(btn=>btn.onclick=()=>{videoUrl.value=btn.dataset.video;loadMovie(btn.dataset.video)});
+$('fullscreenScreen').onclick=()=>{const frame=document.querySelector('.screen-frame');if(frame.requestFullscreen)frame.requestFullscreen()};
+document.querySelectorAll('[data-scene]').forEach(btn=>btn.onclick=()=>{screenStatus.textContent=btn.dataset.scene.toUpperCase();if(btn.dataset.scene==='Louisville map')window.open('https://www.google.com/maps/@38.1886093,-85.8408091,11z','_blank','noopener')});
+
 const notesKey='trentStudioNotesV2',ideasKey='trentStudioIdeasV2';
 $('notes').value=localStorage.getItem(notesKey)||'';
 $('saveNotes').onclick=()=>{localStorage.setItem(notesKey,$('notes').value);$('noteStatus').textContent='Notes saved on this device.'};
