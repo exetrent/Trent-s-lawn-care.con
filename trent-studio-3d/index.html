@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Trent Studio 3D</title>
+<link rel="stylesheet" href="/theater3d.css?v=2">
+<style>
+.faith-neon{position:absolute;top:15%;left:50%;transform:translateX(-50%);font-weight:1000;font-size:clamp(18px,2.3vw,34px);color:#fff;text-shadow:0 0 8px #fff,0 0 18px #ffd85c,0 0 38px #ffd85c;letter-spacing:.12em}
+.lounge-tag{position:absolute;left:50%;top:20%;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#000a;border:1px solid #ff7a1833;color:#ffb36f;font-weight:900;letter-spacing:.08em}
+.site-link{pointer-events:auto;text-decoration:none;color:#061009;background:#c9ef57;padding:9px 13px;border-radius:12px;font-weight:1000}
+@media(max-width:900px){.faith-neon{top:16%}.lounge-tag{top:21%}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/"}}</script>
+</head>
+<body>
+<div id="scene"></div>
+<div class="hud">
+  <div class="topbar">
+    <span class="badge">TRENT STUDIO 3D</span>
+    <div style="display:flex;gap:8px">
+      <a class="site-link" href="/">Lawn Care Site</a>
+      <a class="back" href="/studio-v2.html">Private Studio</a>
+    </div>
+  </div>
+  <div class="neon-title" id="neonTitle">TRENT STUDIO</div>
+  <div class="faith-neon">GOD FIRST ✝</div>
+  <div class="lounge-tag">PRIVATE FOOTBALL PLAYERS' LOUNGE</div>
+  <div class="screen-wrap">
+    <iframe id="movieScreen" title="Trent Studio 3D movie screen" src="https://www.youtube-nocookie.com/embed/videoseries?list=UUuOdZlCQYYKvXiLcF8bC-Jg&rel=0" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <section class="camera-wall left" id="leftCams"></section>
+  <section class="camera-wall right" id="rightCams"></section>
+  <div class="panel help">Drag to look around. Scroll or pinch to zoom. Paste a YouTube link below. Side screens refresh with public Kentucky camera snapshots.</div>
+  <div class="status" id="status">Loading the football theater and camera wall…</div>
+  <div class="panel controls">
+    <input id="videoUrl" placeholder="Paste a YouTube video, Shorts, live, or playlist link">
+    <button id="loadVideo">Play on screen</button>
+    <button id="fullscreen" class="alt">Fullscreen</button>
+    <button id="lights" class="alt">Dim lights</button>
+  </div>
+</div>
+<script type="module" src="/theater3d.js?v=2"></script>
+</body>
+</html>
