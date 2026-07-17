@@ -1,1 +1,1 @@
-import('/studio-v2-auth.js');import('/studio-v2-tools.js');
+const status=document.getElementById('loginStatus');(async()=>{try{await import('/studio-v2-auth.js?v=20260716-2');await import('/studio-v2-tools.js?v=20260716-2')}catch(error){console.error(error);if(status)status.textContent='Studio startup error: '+error.message}})();
