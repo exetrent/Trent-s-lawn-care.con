@@ -1181,6 +1181,34 @@ header .navlinks a:hover{color:var(--green)!important}
 .official-site-badge{color:var(--ink)!important;background:rgba(255,253,247,.92)!important;border-color:rgba(183,223,73,.85)!important}
 .hero .eyebrow{color:#efffc7!important}
 .business-card-copy,.business-card-copy h2,.business-card-copy p{color:var(--ink)!important}
+
+/* READABILITY PASS — keep every label visible over the Louisville background */
+body{color:#061a0e;background:#f6f2e7}
+header,.topbar{background:rgba(3,17,9,.98)!important;color:#f7ffe9!important}
+.brand,.brand strong,.brand span,.navlinks a,.nav-actions a{color:#f7ffe9!important;text-shadow:0 2px 8px rgba(0,0,0,.72)}
+.brand span{color:#d8ff63!important}
+.navlinks a:hover,.navlinks a:focus-visible{color:#d8ff63!important}
+.hero{isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(1,12,6,.94) 0%,rgba(2,22,11,.70) 55%,rgba(2,22,11,.44) 100%);pointer-events:none}
+.hero h1,.hero h2,.hero h3,.hero .kicker,.hero p,.hero-lead,.hero-copy,.hero-copy *{color:#fff!important;text-shadow:0 3px 14px rgba(0,0,0,.9)}
+.hero .kicker,.official-site-badge strong{color:#d8ff63!important}
+.official-site-badge{background:#03150a!important;color:#f7ffe9!important;border:2px solid #c9ef57!important;box-shadow:0 5px 18px rgba(0,0,0,.42)!important;text-shadow:0 2px 7px rgba(0,0,0,.8)}
+.official-site-badge small{color:#f0f8e9!important}
+.section-head h2,.section-head h3,.service-card h3,.embed-card h3,.policy-intro h3{color:#061a0e!important;text-shadow:none!important}
+.section-head p,.service-card p,.embed-card p,.policy-intro p,details p,.social-profile span{color:#25382a!important}
+.card,.service-card,.embed-card,.form,details,.map-card{background:rgba(255,253,248,.97)!important;color:#061a0e!important}
+.card h3,.card h4,.form h2,.form h3,.form p,.form label{color:#061a0e!important;text-shadow:none!important}
+.official-proof{background:#03150a!important;color:#f7ffe9!important}
+.official-proof .proof-item,.official-proof .proof-item strong,.official-proof .proof-item small{color:#f7ffe9!important;text-shadow:0 2px 7px rgba(0,0,0,.8)}
+.official-proof .proof-item small{color:#d6e8d5!important}
+footer{background:#020c06!important;color:#f0f8e9!important}
+footer strong,footer a,footer span{color:#f0f8e9!important}
+.btn-white{color:#061a0e!important;background:#fff!important;text-shadow:none!important}
+.btn-dark{color:#fff!important;background:#061a0e!important}
+.btn-lime{color:#061a0e!important;background:#c9ef57!important}
+input,select,textarea{color:#061a0e!important;background:#fffefa!important}
+input::placeholder,textarea::placeholder{color:#526357!important;opacity:1}
+@media(max-width:760px){.navlinks{background:#03150a!important}.navlinks a{color:#f7ffe9!important}}
 </style>
 </head>
 <body>
