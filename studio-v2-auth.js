@@ -20,16 +20,16 @@ const firebaseConfig = {
   appId: '1:440907459371:web:2a4a9a8bf1594d2f14336e'
 };
 
-const approvedEmails = new Set([
-  'trents.lawncare.ky@gmail.com',
-  'trenton77@gmail.com',
-  'trenton7070@gmail.com'
-]);
+const BUSINESS_EMAIL = 'trents.lawncare.ky@gmail.com';
+const approvedEmails = new Set([BUSINESS_EMAIL]);
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+provider.setCustomParameters({
+  prompt: 'select_account',
+  login_hint: BUSINESS_EMAIL
+});
 
 const signInButton = document.getElementById('signIn');
 const signOutButton = document.getElementById('signOut');
@@ -60,7 +60,9 @@ function showStudio() {
 function setButtonReady(ready) {
   if (!signInButton) return;
   signInButton.disabled = !ready || signInBusy;
-  signInButton.textContent = signInBusy ? 'Opening Google…' : 'Sign in with Google';
+  signInButton.textContent = signInBusy
+    ? 'Opening Google…'
+    : "Sign in with Trent's Lawn Care Google";
 }
 
 function approvedEmail(user) {
@@ -71,10 +73,10 @@ function readableError(error) {
   const code = error?.code || '';
 
   if (code === 'auth/popup-blocked') {
-    return 'Your browser blocked the Google sign-in window. Allow pop-ups for trentslawncare.com, then click Sign in with Google again.';
+    return 'Your browser blocked the Google sign-in window. Allow pop-ups for trentslawncare.com, then try again.';
   }
   if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
-    return 'The Google sign-in window closed before login finished. Click the button and keep the window open until it returns to the Studio.';
+    return 'The Google sign-in window closed before login finished. Click the button and keep the window open.';
   }
   if (code === 'auth/unauthorized-domain') {
     return `Firebase rejected this domain (${window.location.hostname}). Refresh the page and try again.`;
@@ -86,7 +88,7 @@ function readableError(error) {
     return 'Google sign-in could not reach the network. Check your connection and try again.';
   }
   if (code === 'auth/web-storage-unsupported') {
-    return 'Your browser privacy settings blocked sign-in storage. Try a normal Chrome window instead of Incognito and allow cookies for Google/Firebase.';
+    return 'Your browser privacy settings blocked sign-in storage. Use a normal Chrome window and allow cookies for Google and Firebase.';
   }
   if (code === 'auth/account-exists-with-different-credential') {
     return 'That email is already connected to a different sign-in method.';
@@ -103,7 +105,10 @@ async function checkGoogleProvider() {
     body: JSON.stringify({
       providerId: 'google.com',
       continueUri: `${window.location.origin}${window.location.pathname}`,
-      customParameter: { prompt: 'select_account' }
+      customParameter: {
+        prompt: 'select_account',
+        login_hint: BUSINESS_EMAIL
+      }
     })
   });
 
@@ -135,7 +140,7 @@ async function startGoogleSignIn() {
 
   signInBusy = true;
   setButtonReady(false);
-  showStatus('Opening the secure Google account window…');
+  showStatus(`Choose ${BUSINESS_EMAIL} in the secure Google window.`);
 
   try {
     const result = await signInWithPopup(auth, provider);
@@ -144,11 +149,11 @@ async function startGoogleSignIn() {
     if (!approvedEmails.has(email)) {
       await signOut(auth);
       showLoggedOut();
-      showStatus(`Access denied for ${email || 'that account'}. Choose trenton7070@gmail.com or another approved Studio account.`);
+      showStatus(`Access denied for ${email || 'that account'}. Use ${BUSINESS_EMAIL}.`);
       return;
     }
 
-    showStatus('Signed in successfully. Opening Trent Studio…');
+    showStatus('Business account verified. Opening Trent Studio…');
     showStudio();
   } catch (error) {
     console.error('Google sign-in failed:', error);
@@ -178,11 +183,11 @@ onAuthStateChanged(auth, async user => {
   if (!approvedEmails.has(email)) {
     await signOut(auth);
     showLoggedOut();
-    showStatus(`Access denied for ${email || 'that account'}. Choose an approved Trent Studio account.`);
+    showStatus(`Access denied for ${email || 'that account'}. Use ${BUSINESS_EMAIL}.`);
     return;
   }
 
-  showStatus(`Signed in as ${email}.`);
+  showStatus(`Signed in with the Trent's Lawn Care account: ${email}.`);
   showStudio();
 });
 
@@ -193,20 +198,17 @@ async function initializeGoogleLogin() {
 
   try {
     await configurePersistence();
-
-    // Completes any older redirect attempt, while new sign-ins use the more
-    // reliable popup flow for this GitHub Pages-hosted website.
     await getRedirectResult(auth);
 
     try {
       await checkGoogleProvider();
       if (!auth.currentUser) {
-        showStatus('Google sign-in is ready. Use trenton7070@gmail.com or another approved Studio account.');
+        showStatus(`Google sign-in is ready. Use ${BUSINESS_EMAIL}.`);
       }
     } catch (preflightError) {
       console.warn('Google provider preflight could not be confirmed in this browser.', preflightError);
       if (!auth.currentUser) {
-        showStatus('Google sign-in is ready to try. Click the button below.');
+        showStatus(`Click below and choose ${BUSINESS_EMAIL}.`);
       }
     }
   } catch (error) {
@@ -218,7 +220,9 @@ async function initializeGoogleLogin() {
 }
 
 window.addEventListener('online', () => {
-  if (!auth.currentUser && authStateResolved) showStatus('Back online. Google sign-in is ready.');
+  if (!auth.currentUser && authStateResolved) {
+    showStatus(`Back online. Use ${BUSINESS_EMAIL} to sign in.`);
+  }
 });
 window.addEventListener('offline', () => {
   if (!auth.currentUser) showStatus('You are offline. Google sign-in needs an internet connection.');
