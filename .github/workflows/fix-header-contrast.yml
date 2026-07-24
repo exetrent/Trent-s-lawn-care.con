@@ -1,0 +1,87 @@
+name: Fix header contrast
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fix-header-contrast.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix-header:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Make header text clearly visible
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+          marker = "/* HEADER-VISIBILITY-FIX-2026-07-24 */"
+          css = r'''
+          /* HEADER-VISIBILITY-FIX-2026-07-24 */
+          header{
+            background:#03150a!important;
+            border-bottom:2px solid #1b6b43!important;
+          }
+          header .brand,
+          header .brand strong,
+          header .brand span,
+          header .navlinks a,
+          header .nav-actions a,
+          header .menu{
+            color:#f8fff4!important;
+            opacity:1!important;
+            text-shadow:0 2px 9px rgba(0,0,0,.95)!important;
+          }
+          header .brand strong{
+            color:#ffffff!important;
+            font-weight:1000!important;
+          }
+          header .brand span{
+            color:#c9ef57!important;
+            opacity:1!important;
+          }
+          header .navlinks a{
+            color:#f8fff4!important;
+            font-weight:950!important;
+          }
+          header .navlinks a:hover,
+          header .navlinks a:focus-visible{
+            color:#c9ef57!important;
+          }
+          header .nav-actions .btn,
+          header .nav-actions .btn-dark{
+            color:#ffffff!important;
+            background:#062d1b!important;
+            border-color:#174c32!important;
+            text-shadow:none!important;
+          }
+          @media(max-width:760px){
+            header .navlinks{background:#03150a!important}
+            header .navlinks a{color:#ffffff!important}
+          }
+          '''
+
+          if marker not in html:
+              html = html.replace("</style>", css + "\n</style>", 1)
+              path.write_text(html, encoding="utf-8")
+
+      - name: Commit the visibility fix
+        run: |
+          git config user.name "Trent Lawn Care Website"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Header contrast fix already exists."
+          else
+            git commit -m "Make header text fully visible"
+            git push
+          fi
