@@ -1,0 +1,60 @@
+name: Fix YouTube parser cache
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fix-youtube-parser-cache.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Cache-bust updated Studio scripts
+        shell: python
+        run: |
+          from pathlib import Path
+
+          replacements = {
+              Path('theater3d.html'): {
+                  '/theater3d.js?v=1': '/theater3d.js?v=20260724-4',
+              },
+              Path('studio-v2.html'): {
+                  '/studio-v2.js?v=20260717-5': '/studio-v2.js?v=20260724-7',
+              },
+          }
+
+          for path, changes in replacements.items():
+              text = path.read_text(encoding='utf-8')
+              for old, new in changes.items():
+                  text = text.replace(old, new)
+              path.write_text(text, encoding='utf-8')
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          set -e
+          while IFS= read -r -d '' file; do
+            echo "Checking $file"
+            node --input-type=module --check < "$file"
+          done < <(find . -type f -name '*.js' -not -path './node_modules/*' -print0)
+
+      - name: Commit cache-bust changes
+        shell: bash
+        run: |
+          git config user.name "Trent Lawn Care Website"
+          git config user.email "actions@users.noreply.github.com"
+          git add theater3d.html studio-v2.html
+          if git diff --cached --quiet; then
+            echo "Cache versions already updated."
+          else
+            git commit -m "Refresh fixed YouTube parser scripts"
+            git push
+          fi
