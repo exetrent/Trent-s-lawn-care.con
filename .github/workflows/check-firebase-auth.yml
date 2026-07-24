@@ -17,49 +17,85 @@ jobs:
       - name: Check out website
         uses: actions/checkout@v4
 
-      - name: Check public Firebase Authentication configuration
+      - name: Check Firebase Authentication and Google provider
         shell: python
         run: |
           import json
+          import urllib.error
           import urllib.request
           from datetime import datetime, timezone
           from pathlib import Path
 
           api_key = "AIzaSyCdTFyZoBAKfO0L5ZAZ-IP4cqltnlEs1l4"
-          endpoint = f"https://identitytoolkit.googleapis.com/v1/projects?key={api_key}"
+          project_endpoint = f"https://identitytoolkit.googleapis.com/v1/projects?key={api_key}"
+          provider_endpoint = f"https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key={api_key}"
+          continue_uri = "https://trentslawncare.com/studio-v2.html"
 
           report = {
               "checkedAt": datetime.now(timezone.utc).isoformat(),
-              "endpointReachable": False,
+              "projectEndpointReachable": False,
               "apiKeyValid": False,
-              "googleProviderEnabled": False,
               "customDomainAuthorized": False,
               "wwwDomainAuthorized": False,
               "authorizedDomains": [],
-              "providerIds": [],
+              "googleProviderCheckCompleted": False,
+              "googleProviderReady": False,
+              "googleProviderId": None,
+              "googlePreflightErrorCode": None,
+              "googlePreflightErrorMessage": None,
               "error": None,
           }
 
           try:
-              with urllib.request.urlopen(endpoint, timeout=25) as response:
-                  payload = json.load(response)
+              with urllib.request.urlopen(project_endpoint, timeout=25) as response:
+                  project_payload = json.load(response)
 
-              authorized = sorted(set(payload.get("authorizedDomains", [])))
-              provider_ids = sorted({
-                  item.get("provider") or item.get("providerId")
-                  for item in payload.get("idpConfig", [])
-                  if item.get("provider") or item.get("providerId")
-              })
-
+              authorized = sorted(set(project_payload.get("authorizedDomains", [])))
               report.update({
-                  "endpointReachable": True,
+                  "projectEndpointReachable": True,
                   "apiKeyValid": True,
-                  "googleProviderEnabled": "google.com" in provider_ids,
                   "customDomainAuthorized": "trentslawncare.com" in authorized,
                   "wwwDomainAuthorized": "www.trentslawncare.com" in authorized,
                   "authorizedDomains": authorized,
-                  "providerIds": provider_ids,
               })
+
+              request_body = json.dumps({
+                  "providerId": "google.com",
+                  "continueUri": continue_uri,
+                  "customParameter": {"prompt": "select_account"},
+              }).encode("utf-8")
+
+              request = urllib.request.Request(
+                  provider_endpoint,
+                  data=request_body,
+                  headers={"Content-Type": "application/json"},
+                  method="POST",
+              )
+
+              try:
+                  with urllib.request.urlopen(request, timeout=25) as response:
+                      provider_payload = json.load(response)
+
+                  report.update({
+                      "googleProviderCheckCompleted": True,
+                      "googleProviderReady": bool(provider_payload.get("authUri")),
+                      "googleProviderId": provider_payload.get("providerId"),
+                  })
+              except urllib.error.HTTPError as error:
+                  error_payload = {}
+                  try:
+                      error_payload = json.loads(error.read().decode("utf-8"))
+                  except Exception:
+                      pass
+
+                  details = error_payload.get("error", {})
+                  message = details.get("message") or str(error)
+                  report.update({
+                      "googleProviderCheckCompleted": True,
+                      "googleProviderReady": False,
+                      "googlePreflightErrorCode": message.split(" : ", 1)[0] if message else None,
+                      "googlePreflightErrorMessage": message,
+                  })
           except Exception as error:
               report["error"] = f"{type(error).__name__}: {error}"
 
@@ -78,6 +114,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Authentication report is unchanged."
           else
-            git commit -m "Update Firebase authentication status"
+            git commit -m "Update Firebase Google login status"
             git push
           fi
