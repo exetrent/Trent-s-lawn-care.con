@@ -7,7 +7,8 @@ function youtubeEmbed(raw) {
   try {
     const candidate = value.includes('://') ? value : `https://${value}`;
     const url = new URL(candidate);
-    const host = url.hostname.toLowerCase().replace(/^www\./, '');
+    let host = url.hostname.toLowerCase();
+    if (host.startsWith('www.')) host = host.slice(4);
 
     const playlistId = url.searchParams.get('list');
     if (playlistId) {
