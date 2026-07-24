@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-07-24T05:02:58.447881+00:00",
+  "checkedAt": "2026-07-24T05:03:41.492986+00:00",
   "javascriptSyntaxValid": true,
   "firebaseGoogleProviderReady": true,
-  "livePageUpdated": true,
-  "liveLoaderUpdated": true,
-  "liveAuthUpdated": true,
+  "livePageUpdated": false,
+  "liveLoaderUpdated": false,
+  "liveAuthUpdated": false,
   "expectedVersion": "20260724-8",
-  "error": null,
-  "verified": true
+  "error": "Live deployment did not update before timeout: version markers missing",
+  "verified": false
 }
