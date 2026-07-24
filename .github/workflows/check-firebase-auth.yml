@@ -1,0 +1,83 @@
+name: Check Firebase Google login
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/check-firebase-auth.yml
+
+permissions:
+  contents: write
+
+jobs:
+  check-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Check public Firebase Authentication configuration
+        shell: python
+        run: |
+          import json
+          import urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          api_key = "AIzaSyCdTFyZoBAKfO0L5ZAZ-IP4cqltnlEs1l4"
+          endpoint = f"https://identitytoolkit.googleapis.com/v1/projects?key={api_key}"
+
+          report = {
+              "checkedAt": datetime.now(timezone.utc).isoformat(),
+              "endpointReachable": False,
+              "apiKeyValid": False,
+              "googleProviderEnabled": False,
+              "customDomainAuthorized": False,
+              "wwwDomainAuthorized": False,
+              "authorizedDomains": [],
+              "providerIds": [],
+              "error": None,
+          }
+
+          try:
+              with urllib.request.urlopen(endpoint, timeout=25) as response:
+                  payload = json.load(response)
+
+              authorized = sorted(set(payload.get("authorizedDomains", [])))
+              provider_ids = sorted({
+                  item.get("provider") or item.get("providerId")
+                  for item in payload.get("idpConfig", [])
+                  if item.get("provider") or item.get("providerId")
+              })
+
+              report.update({
+                  "endpointReachable": True,
+                  "apiKeyValid": True,
+                  "googleProviderEnabled": "google.com" in provider_ids,
+                  "customDomainAuthorized": "trentslawncare.com" in authorized,
+                  "wwwDomainAuthorized": "www.trentslawncare.com" in authorized,
+                  "authorizedDomains": authorized,
+                  "providerIds": provider_ids,
+              })
+          except Exception as error:
+              report["error"] = f"{type(error).__name__}: {error}"
+
+          Path("firebase-auth-status.json").write_text(
+              json.dumps(report, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+          print(json.dumps(report, indent=2))
+
+      - name: Save authentication check result
+        run: |
+          git config user.name "Trent Lawn Care Website"
+          git config user.email "actions@users.noreply.github.com"
+          git add firebase-auth-status.json
+          if git diff --cached --quiet; then
+            echo "Authentication report is unchanged."
+          else
+            git commit -m "Update Firebase authentication status"
+            git push
+          fi
