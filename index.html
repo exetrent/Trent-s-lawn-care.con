@@ -1209,6 +1209,50 @@ footer strong,footer a,footer span{color:#f0f8e9!important}
 input,select,textarea{color:#061a0e!important;background:#fffefa!important}
 input::placeholder,textarea::placeholder{color:#526357!important;opacity:1}
 @media(max-width:760px){.navlinks{background:#03150a!important}.navlinks a{color:#f7ffe9!important}}
+
+/* HEADER-VISIBILITY-FIX-2026-07-24 */
+header{
+  background:#03150a!important;
+  border-bottom:2px solid #1b6b43!important;
+}
+header .brand,
+header .brand strong,
+header .brand span,
+header .navlinks a,
+header .nav-actions a,
+header .menu{
+  color:#f8fff4!important;
+  opacity:1!important;
+  text-shadow:0 2px 9px rgba(0,0,0,.95)!important;
+}
+header .brand strong{
+  color:#ffffff!important;
+  font-weight:1000!important;
+}
+header .brand span{
+  color:#c9ef57!important;
+  opacity:1!important;
+}
+header .navlinks a{
+  color:#f8fff4!important;
+  font-weight:950!important;
+}
+header .navlinks a:hover,
+header .navlinks a:focus-visible{
+  color:#c9ef57!important;
+}
+header .nav-actions .btn,
+header .nav-actions .btn-dark{
+  color:#ffffff!important;
+  background:#062d1b!important;
+  border-color:#174c32!important;
+  text-shadow:none!important;
+}
+@media(max-width:760px){
+  header .navlinks{background:#03150a!important}
+  header .navlinks a{color:#ffffff!important}
+}
+
 </style>
 </head>
 <body>
