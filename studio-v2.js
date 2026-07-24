@@ -1,9 +1,9 @@
 const status = document.getElementById('loginStatus');
-window.__TRENT_STUDIO_VERSION__ = '20260724-8';
+window.__TRENT_STUDIO_VERSION__ = '20260724-9';
 
 (async () => {
   try {
-    await import('/studio-v2-auth.js?v=20260724-8');
+    await import('/studio-v2-auth.js?v=20260724-9');
     await import('/studio-v2-tools.js?v=20260724-7');
     const top = document.querySelector('.top div:last-child');
     if (top && !document.getElementById('enter3dTheater')) {
