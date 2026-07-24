@@ -3,6 +3,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   onAuthStateChanged,
   setPersistence,
@@ -32,6 +33,7 @@ provider.setCustomParameters({
 });
 
 const signInButton = document.getElementById('signIn');
+const redirectButton = document.getElementById('signInRedirect');
 const signOutButton = document.getElementById('signOut');
 const loginStatus = document.getElementById('loginStatus');
 const loginView = document.getElementById('login');
@@ -57,29 +59,45 @@ function showStudio() {
   studioView?.classList.remove('hidden');
 }
 
-function setButtonReady(ready) {
-  if (!signInButton) return;
-  signInButton.disabled = !ready || signInBusy;
-  signInButton.textContent = signInBusy
-    ? 'Opening Google…'
-    : "Sign in with Trent's Lawn Care Google";
+function setButtonsReady(ready) {
+  const disabled = !ready || signInBusy;
+  if (signInButton) {
+    signInButton.disabled = disabled;
+    signInButton.textContent = signInBusy
+      ? 'Opening Google…'
+      : "Sign in with Trent's Lawn Care Google";
+  }
+  if (redirectButton) redirectButton.disabled = disabled;
 }
 
-function approvedEmail(user) {
+function userEmail(user) {
   return (user?.email || '').trim().toLowerCase();
+}
+
+async function approveUser(user) {
+  const email = userEmail(user);
+  if (!approvedEmails.has(email)) {
+    await signOut(auth);
+    showLoggedOut();
+    showStatus(`Access denied for ${email || 'that account'}. Use ${BUSINESS_EMAIL}.`);
+    return false;
+  }
+  showStatus(`Signed in with the Trent's Lawn Care account: ${email}.`);
+  showStudio();
+  return true;
 }
 
 function readableError(error) {
   const code = error?.code || '';
 
   if (code === 'auth/popup-blocked') {
-    return 'Your browser blocked the Google sign-in window. Allow pop-ups for trentslawncare.com, then try again.';
+    return 'Chrome blocked the pop-up. Use the Full-page Google sign-in button below.';
   }
   if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
-    return 'The Google sign-in window closed before login finished. Click the button and keep the window open.';
+    return 'The Google window closed before sign-in finished. Try again or use Full-page Google sign-in.';
   }
   if (code === 'auth/unauthorized-domain') {
-    return `Firebase rejected this domain (${window.location.hostname}). Refresh the page and try again.`;
+    return `Firebase rejected this domain (${window.location.hostname}).`;
   }
   if (code === 'auth/operation-not-allowed') {
     return 'Google sign-in is not enabled in Firebase Authentication.';
@@ -88,37 +106,13 @@ function readableError(error) {
     return 'Google sign-in could not reach the network. Check your connection and try again.';
   }
   if (code === 'auth/web-storage-unsupported') {
-    return 'Your browser privacy settings blocked sign-in storage. Use a normal Chrome window and allow cookies for Google and Firebase.';
+    return 'Browser privacy settings blocked sign-in storage. Use a normal Chrome window, not Incognito.';
   }
-  if (code === 'auth/account-exists-with-different-credential') {
-    return 'That email is already connected to a different sign-in method.';
+  if (code === 'auth/operation-not-supported-in-this-environment') {
+    return 'This browser cannot use the pop-up method. Use Full-page Google sign-in.';
   }
 
   return `Google sign-in error${code ? ` (${code})` : ''}: ${error?.message || 'Unknown error'}`;
-}
-
-async function checkGoogleProvider() {
-  const endpoint = `https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=${encodeURIComponent(firebaseConfig.apiKey)}`;
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      providerId: 'google.com',
-      continueUri: `${window.location.origin}${window.location.pathname}`,
-      customParameter: {
-        prompt: 'select_account',
-        login_hint: BUSINESS_EMAIL
-      }
-    })
-  });
-
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok || !payload.authUri) {
-    const message = payload?.error?.message || `provider check failed (${response.status})`;
-    throw new Error(message);
-  }
-
-  return true;
 }
 
 async function configurePersistence() {
@@ -130,42 +124,54 @@ async function configurePersistence() {
   }
 }
 
-async function startGoogleSignIn() {
+async function startPopupSignIn() {
   if (!signInButton || signInBusy) return;
-
   if (!navigator.onLine) {
-    showStatus('You appear to be offline. Connect to the internet and try again.');
+    showStatus('You are offline. Connect to the internet and try again.');
     return;
   }
 
   signInBusy = true;
-  setButtonReady(false);
-  showStatus(`Choose ${BUSINESS_EMAIL} in the secure Google window.`);
+  setButtonsReady(false);
+  showStatus(`Choose ${BUSINESS_EMAIL} in the Google window.`);
 
   try {
     const result = await signInWithPopup(auth, provider);
-    const email = approvedEmail(result.user);
-
-    if (!approvedEmails.has(email)) {
-      await signOut(auth);
-      showLoggedOut();
-      showStatus(`Access denied for ${email || 'that account'}. Use ${BUSINESS_EMAIL}.`);
-      return;
-    }
-
-    showStatus('Business account verified. Opening Trent Studio…');
-    showStudio();
+    await approveUser(result.user);
   } catch (error) {
-    console.error('Google sign-in failed:', error);
+    console.error('Google popup sign-in failed:', error);
     showLoggedOut();
     showStatus(readableError(error));
   } finally {
     signInBusy = false;
-    setButtonReady(true);
+    setButtonsReady(true);
   }
 }
 
-signInButton?.addEventListener('click', startGoogleSignIn);
+async function startRedirectSignIn() {
+  if (signInBusy) return;
+  if (!navigator.onLine) {
+    showStatus('You are offline. Connect to the internet and try again.');
+    return;
+  }
+
+  signInBusy = true;
+  setButtonsReady(false);
+  showStatus(`Opening full-page Google sign-in for ${BUSINESS_EMAIL}…`);
+
+  try {
+    sessionStorage.setItem('trentStudioRedirectLogin', '1');
+    await signInWithRedirect(auth, provider);
+  } catch (error) {
+    console.error('Google redirect sign-in failed:', error);
+    signInBusy = false;
+    setButtonsReady(true);
+    showStatus(readableError(error));
+  }
+}
+
+signInButton?.addEventListener('click', startPopupSignIn);
+redirectButton?.addEventListener('click', startRedirectSignIn);
 signOutButton?.addEventListener('click', async () => {
   await signOut(auth);
   showStatus('Signed out.');
@@ -173,49 +179,36 @@ signOutButton?.addEventListener('click', async () => {
 
 onAuthStateChanged(auth, async user => {
   authStateResolved = true;
-
   if (!user) {
     showLoggedOut();
     return;
   }
-
-  const email = approvedEmail(user);
-  if (!approvedEmails.has(email)) {
-    await signOut(auth);
-    showLoggedOut();
-    showStatus(`Access denied for ${email || 'that account'}. Use ${BUSINESS_EMAIL}.`);
-    return;
-  }
-
-  showStatus(`Signed in with the Trent's Lawn Care account: ${email}.`);
-  showStudio();
+  await approveUser(user);
 });
 
 async function initializeGoogleLogin() {
   showLoggedOut();
-  setButtonReady(false);
+  setButtonsReady(false);
   showStatus('Checking secure Google sign-in…');
 
   try {
     await configurePersistence();
-    await getRedirectResult(auth);
+    const redirectResult = await getRedirectResult(auth);
+    if (redirectResult?.user) {
+      sessionStorage.removeItem('trentStudioRedirectLogin');
+      await approveUser(redirectResult.user);
+      return;
+    }
 
-    try {
-      await checkGoogleProvider();
-      if (!auth.currentUser) {
-        showStatus(`Google sign-in is ready. Use ${BUSINESS_EMAIL}.`);
-      }
-    } catch (preflightError) {
-      console.warn('Google provider preflight could not be confirmed in this browser.', preflightError);
-      if (!auth.currentUser) {
-        showStatus(`Click below and choose ${BUSINESS_EMAIL}.`);
-      }
+    if (!auth.currentUser) {
+      showStatus(`Google sign-in is ready. Use ${BUSINESS_EMAIL}.`);
     }
   } catch (error) {
     console.error('Studio authentication setup failed:', error);
     showStatus(readableError(error));
   } finally {
-    setButtonReady(true);
+    signInBusy = false;
+    setButtonsReady(true);
   }
 }
 
