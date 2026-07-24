@@ -1,8 +1,7 @@
 {
-  "checkedAt": "2026-07-24T04:54:36.458298+00:00",
-  "endpointReachable": true,
+  "checkedAt": "2026-07-24T04:56:00.690224+00:00",
+  "projectEndpointReachable": true,
   "apiKeyValid": true,
-  "googleProviderEnabled": false,
   "customDomainAuthorized": true,
   "wwwDomainAuthorized": true,
   "authorizedDomains": [
@@ -12,6 +11,10 @@
     "trentslawncare.com",
     "www.trentslawncare.com"
   ],
-  "providerIds": [],
+  "googleProviderCheckCompleted": true,
+  "googleProviderReady": true,
+  "googleProviderId": "google.com",
+  "googlePreflightErrorCode": null,
+  "googlePreflightErrorMessage": null,
   "error": null
 }
